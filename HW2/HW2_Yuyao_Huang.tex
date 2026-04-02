@@ -1,0 +1,676 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, physics}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{amsmath}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newenvironment{solution}
+{\par\noindent\textbf{Solution:}\par}
+{\vspace{1em}}
+
+\title{Homework Assignment No.2 \\ EE520/EE459 \\ Yuyao Huang}
+\date{Due 11:59 PM, February 26, 2026}
+\begin{document}
+\maketitle
+
+\textbf{Total: 100 points} \\
+\textbf{Submit: a single PDF file of all your work}
+
+\section*{Problem 1 (10 points)}
+
+Apply the definition of CNOT gate and show that \\
+(1) $\operatorname{CNOT} \, \ket{+}\ket{-} = \ket{-}\ket{-}$ and \\
+(2) $\operatorname{CNOT} \, \ket{-}\ket{-} = \ket{+}\ket{-}$.
+
+Here, the 1st qubit is the Control, and the 2nd qubit is the Target.
+
+\begin{solution}
+
+Given, \[\ket{+} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1}), \quad \ket{-} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\]
+and \[\operatorname{CNOT}\ket{a}\ket{b} = \ket{a}\ket{a \oplus b}, \quad a,b \in \{0,1\}\]
+So on the computational basis, we have
+\[\operatorname{CNOT}\ket{00} = \ket{00}, \quad \operatorname{CNOT}\ket{01} = \ket{01}, \quad \operatorname{CNOT}\ket{10} = \ket{11}, \quad \operatorname{CNOT}\ket{11} = \ket{10}.\]
+
+Therefore, the solution steps of (1),
+
+\textbf{Step 1: Expand $\ket{+}\ket{-}$ in computational basis}
+
+\[\begin{aligned}
+\ket{+}\ket{-} &= \left(\frac{1}{\sqrt{2}}(\ket{0} +\ket{1})\right)\left(\frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\right) \\
+&= \frac{1}{2}\left(\ket{0}(\ket{0} - \ket{1}) + \ket{1}(\ket{0} - \ket{1})\right) \\
+&= \frac{1}{2}\left(\ket{00} - \ket{01} + \ket{10} - \ket{11}\right)
+\end{aligned}\]
+
+\textbf{Step 2: Apply CNOT linearly term-by-term}
+
+\[\begin{aligned}
+\operatorname{CNOT}\ket{+}\ket{-} &= \frac{1}{2}\left(\operatorname{CNOT}\ket{00} - \operatorname{CNOT}\ket{01} + \operatorname{CNOT}\ket{10} - \operatorname{CNOT}\ket{11}\right) \\
+&= \frac{1}{2}\left(\ket{00} - \ket{01} + \ket{11} - \ket{10}\right) \\
+&= \frac{1}{2}\left(\ket{0}(\ket{0} - \ket{1}) + \ket{1}(\ket{1} - \ket{0})\right) \\
+&= \frac{1}{2}\left(\ket{0}(\ket{0} - \ket{1}) - \ket{1}(\ket{0} - \ket{1})\right) \\
+&= \left(\frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\right)\left(\frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\right) \\
+&= \ket{-}\ket{-}
+\end{aligned}\]
+
+So, \[\boxed{\operatorname{CNOT}\ket{+}\ket{-} = \ket{-}\ket{-}}\]
+
+The solution steps of (2),
+
+\textbf{Step 1: Expand $\ket{-}\ket{-}$ in computational basis}
+
+\[\begin{aligned}
+\ket{-}\ket{-} &= \left(\frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\right)\left(\frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\right) \\
+&= \frac{1}{2}\left(\ket{0}(\ket{0} - \ket{1}) - \ket{1}(\ket{0} - \ket{1})\right) \\
+&= \frac{1}{2}\left(\ket{00} - \ket{01} - \ket{10} + \ket{11}\right)
+\end{aligned}\]
+
+\textbf{Step 2: Apply CNOT linearly term-by-term}
+
+\[\begin{aligned}
+\operatorname{CNOT}\ket{-}\ket{-} &= \frac{1}{2}\left(\operatorname{CNOT}\ket{00} - \operatorname{CNOT}\ket{01} - \operatorname{CNOT}\ket{10} + \operatorname{CNOT}\ket{11}\right) \\
+&= \frac{1}{2}\left(\ket{00} - \ket{01} - \ket{11} + \ket{10}\right) \\
+&= \frac{1}{2}\left(\ket{00} - \ket{01} + \ket{10} - \ket{11}\right) \\
+&= \frac{1}{2}\left(\ket{0}(\ket{0} - \ket{1}) + \ket{1}(\ket{0} - \ket{1})\right) \\
+&= \left(\frac{1}{\sqrt{2}}(\ket{0} + \ket{1})\right)\left(\frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\right) \\
+&= \ket{+}\ket{-}
+\end{aligned}\]
+
+So, \[\boxed{\operatorname{CNOT}\ket{-}\ket{-} = \ket{+}\ket{-}}\]
+
+\end{solution}
+
+\section*{Problem 2 (20 points)}
+
+Sketch the actions of the Rotation Operator $R_n(\alpha)$ on the Bloch sphere for the following two operators: (1) $R_y(\frac{\pi}{2})$ and (2) $R_n(\pi)$ with $n = \frac{[1,0,1]}{\sqrt{2}}$. Specifically, \\
+(A) first calcalculate the results of the following: (i) $R_y(\frac{\pi}{2})\ket{0}$, $R_y(\frac{\pi}{2})\ket{+}$, $R_y(\frac{\pi}{2})\ket{1}$, $R_y(\frac{\pi}{2})\ket{-}$, (ii) for $n = \frac{[1,0,1]}{\sqrt{2}} = \frac{(i+k)}{\sqrt{2}}$, calculate $R_n(\pi)\ket{0}$, $R_n(\pi)\ket{+}$, $R_n(\pi)\ket{1}$, $R_n(\pi)\ket{-}$. \\
+(B) Next, sketch on the Bloch sphere the actions of $R_y(\frac{\pi}{2})$ and $R_n(\pi)$ for the specific cases that you calculated in (i) and (ii). \\
+We have seen the action of this gate $R_n(\pi)$ so many times before. Can you identify it?
+
+\begin{solution}
+
+Given,
+
+\textbf{(1) Rotation operator}
+
+\[R_n(\alpha) = e^{-i\frac{\alpha}{2}(\boldsymbol{n} \cdot \boldsymbol{\sigma})} = \cos(\frac{\alpha}{2})\operatorname{I} -i\sin(\frac{\alpha}{2}(\boldsymbol{n} \cdot \boldsymbol{\sigma}))\]
+
+\textbf{(2) Pauli matrices and basis states}
+
+\[\sigma_x = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}, \quad \sigma_y = \begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}, \quad \sigma_z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}\]
+
+\[\ket{0} = \begin{bmatrix}1 \\ 0\end{bmatrix}, \quad \ket{1} = \begin{bmatrix}0 \\ 1\end{bmatrix}, \quad \ket{+} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ 1\end{bmatrix}, \quad \ket{-} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ -1\end{bmatrix}\]
+
+\textbf{A. (i)}
+
+\textbf{Step 1: Write $R_y(\frac{\pi}{2})$ with $n = (0,1,0)$ as a matrix}
+
+\[\begin{aligned}
+R_y(\frac{\pi}{2}) &= \cos(\frac{\pi}{4})\operatorname{I} - i\sin(\frac{\pi}{4}(\boldsymbol{n} \cdot \boldsymbol{\sigma})) \\
+&= \cos(\frac{\pi}{4})\operatorname{I} - i\sin(\frac{\pi}{4})\sigma_y
+\end{aligned}\]
+
+For $\cos(\frac{\pi}{4}) = \sin(\frac{\pi}{4}) = \frac{1}{\sqrt{2}}$,
+\[\begin{aligned}
+R_y(\frac{\pi}{2}) &= \frac{1}{\sqrt{2}}(\operatorname{I} - i\sigma_y) \\
+&= \frac{1}{\sqrt{2}}\left(\begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix} - i\begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}\right) \\
+&= \frac{1}{\sqrt{2}}\left(\begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix} + (-i)\begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}\right) \\
+&= \frac{1}{\sqrt{2}}\left(\begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix} + \begin{bmatrix}0 & -1 \\ 1 & 0\end{bmatrix}\right) \\
+&= \frac{1}{\sqrt{2}}\begin{bmatrix}1 & -1 \\ 1 & 1\end{bmatrix}
+\end{aligned}\]
+
+\textbf{Step 2: Apply to each state}
+
+\[\boxed{R_y(\frac{\pi}{2})\ket{0} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & -1 \\ 1 & 1\end{bmatrix}\begin{bmatrix}1 \\ 0\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ 1\end{bmatrix} = \ket{+}}\]
+
+\[\boxed{R_y(\frac{\pi}{2})\ket{+} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & -1 \\ 1 & 1\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ 1\end{bmatrix} = \frac{1}{2}\begin{bmatrix}0 \\ 2\end{bmatrix} = \ket{1}}\]
+
+\[\boxed{R_y(\frac{\pi}{2})\ket{1} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & -1 \\ 1 & 1\end{bmatrix}\begin{bmatrix}0 \\ 1\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}-1 \\ 1\end{bmatrix} = -\frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ -1\end{bmatrix} = -\ket{-} = \ket{-}}\]
+
+\[\boxed{R_y(\frac{\pi}{2})\ket{-} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & -1 \\ 1 & 1\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ -1\end{bmatrix} = \frac{1}{2}\begin{bmatrix}2 \\ 0\end{bmatrix} = \ket{0}}\]
+
+\textbf{A. (ii)}
+
+\textbf{Step 1: Write $R_n(\pi)$ with $n = \frac{[1,0,1]}{\sqrt{2}} = \frac{(1+k)}{\sqrt{2}}$ as a matrix}
+
+\[\begin{aligned}
+R_n(\pi) &= \cos(\frac{\pi}{2})\operatorname{I} - i\sin(\frac{\pi}{2}(\boldsymbol{n} \cdot \boldsymbol{\sigma})) \\
+&= \cos(\frac{\pi}{2})\operatorname{I} - i\sin(\frac{\pi}{2})\frac{1}{\sqrt{2}}(\sigma_x + \sigma_z)
+\end{aligned}\]
+
+For $\cos(\frac{\pi}{2}) = 0$ and $\sin(\frac{\pi}{2}) = 1$, and $\operatorname{H} = \frac{1}{\sqrt{2}}(\sigma_x + \sigma_z)$
+
+\[\begin{aligned}
+R_n(\pi) &= - i\frac{1}{\sqrt{2}}(\sigma_x + \sigma_z) \\
+&= -i\operatorname{H}
+\end{aligned}\]
+
+\textbf{Step 2: Apply to states (using Hadamard action)}
+
+We know, \[\operatorname{H}\ket{0} = \ket{+}, \quad \operatorname{H}\ket{1} = \ket{-}, \quad \operatorname{H}\ket{+} = \ket{0}, \quad \operatorname{H}\ket{-} = \ket{1}\]
+
+Thus, \[R_n(\pi)\ket{\psi} = -i\operatorname{H}\ket{\psi}\]
+
+So, 
+\[\boxed{\begin{aligned}
+R_n(\pi)\ket{0} = -i\ket{+} \\
+R_n(\pi)\ket{+} = -i\ket{0} \\
+R_n(\pi)\ket{1} = -i\ket{-} \\
+R_n(\pi)\ket{-} = -i\ket{1}
+\end{aligned}}\]
+
+\textbf{B. Bloch Sphere Sketches}
+
+The following figures illustrate the actions of the rotation operators on the Bloch sphere:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{HW2_code/orinial.png}
+\caption{Reference Bloch sphere showing the standard basis states: $\ket{0}$ (north pole), $\ket{1}$ (south pole), $\ket{+}$ (positive x-axis), $\ket{-}$ (negative x-axis), $\ket{+i}$ (positive y-axis), and $\ket{-i}$ (negative y-axis).}
+\label{fig:bloch_original}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{HW2_code/r_pi_2.png}
+\caption{Action of $R_y(\frac{\pi}{2})$ on the Bloch sphere. This operator rotates states by $\frac{\pi}{2}$ radians (90°) around the y-axis: $\ket{0} \to \ket{+}$, $\ket{+} \to \ket{1}$, $\ket{1} \to \ket{-}$, $\ket{-} \to \ket{0}$.}
+\label{fig:bloch_ry_pi2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{HW2_code/r_pi.png}
+\caption{Action of $R_n(\pi)$ with $n = \frac{[1,0,1]}{\sqrt{2}}$ on the Bloch sphere. The rotation axis is in the xz-plane at 45° between the x and z axes. This operator rotates by $\pi$ radians (180°) around this axis, which is equivalent to the Hadamard gate (up to a global phase $-i$): $\ket{0} \leftrightarrow \ket{+}$, $\ket{1} \leftrightarrow \ket{-}$.}
+\label{fig:bloch_rn_pi}
+\end{figure}
+
+\textbf{Identification of $R_n(\pi)$:}
+
+The gate $R_n(\pi) = -i\operatorname{H}$ is equivalent to the \textbf{Hadamard gate} up to a global phase factor of $-i$. Since global phases do not affect measurement outcomes or physical observables, $R_n(\pi)$ performs the same quantum operation as the Hadamard gate, which swaps the computational basis with the Hadamard basis.
+
+\end{solution}
+
+\section*{Problem 3 (5 points)}
+
+Show that $(\boldsymbol{n} \cdot \boldsymbol{\sigma})^2 = \sigma_{\boldsymbol{n}}^2 = \operatorname{I}$ where $\sigma_{\boldsymbol{n}} = \boldsymbol{\sigma} \cdot \boldsymbol{n} = \sin\theta \cos\phi \, \sigma_x + \sin\theta \sin\phi \, \sigma_y + \cos\theta \, \sigma_z$, where $\boldsymbol{n} = \sin\theta \cos\phi \, i + \sin\theta \sin\phi \, j + \cos\theta \, k$ is a unit vector.
+
+\textbf{Hint}: \textit{You can do it by either writing $\sigma_n$ as a $2 \times 2$ matrix and matrix multiplication, or doing the squaring $\sigma_n$ directlywhile treating the cross-product terms carefully with the
+anti-commuting properties of Pauli matrices like $\sigma_x \sigma_y = - \sigma_y \sigma_x$, etc.}
+
+\begin{solution}
+
+\textbf{2 methods to show $(\boldsymbol{n} \cdot \boldsymbol{\sigma})^2 = \operatorname{I}$}
+
+\textbf{Method 1: Pauli algebra + anti-commutation}
+
+\textbf{Step 1: Expand the square}
+\[\begin{aligned}
+\operatorname{A} &= \boldsymbol{n} \cdot \boldsymbol{\sigma} = n_x \sigma_x + n_y \sigma_y + n_z \sigma_z \\
+\Rightarrow \operatorname{A^2} &= (n_x \sigma_x + n_y \sigma_y + n_z \sigma_z)^2 \\
+\Rightarrow \operatorname{A^2} &= n_x^2 \sigma_x^2 + n_x n_y \sigma_x \sigma_y + n_x n_z \sigma_x \sigma_z + n_y^2 \sigma_y^2 + n_y n_z \sigma_y \sigma_z + n_z^2 \sigma_z^2 \\
+\Rightarrow \operatorname{A^2} &= n_x^2 \sigma_x^2 + n_y^2 \sigma_y^2 + n_z^2 \sigma_z^2 + n_x n_y (\sigma_x \sigma_y + \sigma_y \sigma_x) + n_x n_z (\sigma_x \sigma_z + \sigma_z \sigma_x) + n_y n_z (\sigma_y \sigma_z + \sigma_z \sigma_y)
+\end{aligned}\]
+
+\textbf{Step 2: Use the key identities}
+
+Pauli matrics satisfy:
+
+1. $\sigma_x^2 = \sigma_y^2 = \sigma_z^2 = \operatorname{I}$,
+
+2. Anti-commutation: for $i \neq j$,
+
+\[\sigma_i \sigma_j = - \sigma_j \sigma_i \Rightarrow \sigma_i \sigma_j + \sigma_j \sigma_i = 0\]
+
+So all cross terms vanish:
+\[\sigma_x \sigma_y + \sigma_y \sigma_x = 0, \quad \sigma_x \sigma_z + \sigma_z \sigma_x = 0, \quad \sigma_y \sigma_z + \sigma_z \sigma_y = 0\]
+
+Thus, \[\operatorname{A^2} = n_x^2 \operatorname{I} + n_y^2 \operatorname{I} + n_z^2 \operatorname{I} = (n_x^2 + n_y^2 + n_z^2) \operatorname{I}\]
+
+\textbf{Step 3: Use unit vector condition}
+
+Since $n$ is a unit vector, \[n_x^2 + n_y^2 + n_z^2 = 1\]
+
+Therefore, \[\boxed{(\boldsymbol{n} \cdot \boldsymbol{\sigma})^2 = \operatorname{I}}\]
+
+
+\textbf{Method 2: Write $\boldsymbol{\sigma}$ as matrix and multiply}
+
+Pauli matrices: \[\sigma_x = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}, \quad \sigma_y = \begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}, \quad \sigma_z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}\]
+
+Compute,
+\[\begin{aligned}
+\sigma_n &= \sigma_x n_x + \sigma_y n_y + \sigma_z n_z = \begin{bmatrix}n_z & n_x - i n_y \\ n_x + i n_y & -n_z\end{bmatrix} \\
+\Rightarrow \sigma_n^2 &= (\boldsymbol{n} \cdot \boldsymbol{\sigma})^2 \\
+&= \begin{bmatrix}n_z & n_x - i n_y \\ n_x + i n_y & -n_z\end{bmatrix} \begin{bmatrix}n_z & n_x - i n_y \\ n_x + i n_y & -n_z\end{bmatrix} \\
+&= \begin{bmatrix}n_z^2 + (n_x - i n_y)(n_x + i n_y) & n_z(n_x - i n_y) + (n_x - i n_y)(-n_z) \\ (n_x + i n_y)n_z + (-n_z)(n_x + i n_y) & (n_x +i n_y)(n_x - i n_y) + n_z^2\end{bmatrix} \\
+&= \begin{bmatrix}n_x^2 + n_y^2 + n_z^2 & 0 \\ 0 & n_x^2 + n_y^2 + n_z^2\end{bmatrix} \\
+&= (n_x^2 + n_y^2 + n_z^2)\operatorname{I} \\
+&= \operatorname{I}
+\end{aligned}\]
+
+Thus, \[\boxed{(\boldsymbol{n} \cdot \boldsymbol{\sigma})^2 = \operatorname{I}}\]
+
+\end{solution}
+
+\section*{Problem 4 (10 points)}
+
+For the operators $\sigma_n$ and $R_n(\alpha)$, find their eigenvalues and eigenvectors. Note that
+\begin{itemize}
+    \item $\sigma_n = \sigma \cdot \boldsymbol{n}$ and, 
+    \item $R_n(\alpha) = \mathrm{e}^{-i \sigma \cdot \boldsymbol{n} \frac{\alpha}{2}} = \cos(\frac{\alpha}{2}) \operatorname{I} - i \sin(\frac{\alpha}{2}) \sigma \cdot \boldsymbol{n}$
+\end{itemize}
+\textbf{Hint}: \textit{They have the same eigenvectors. Also, $\sigma_n$ has the eigenvalues of $\pm 1$ (check
+Hermitian), but $R_n(\alpha)$ has the eigenvalues of $\mathrm{e}^{\pm i \frac{\alpha}{2}}$ (check Unitary but not Hermitian). Do not forget to use the normalization condition $\braket{u} = 1$ when finding the eigenvector
+from $\sigma_n \ket{u} = \lambda \ket{u}$ where $\lambda = \pm 1$.}
+
+\begin{solution}
+
+\textbf{Part 1: Eigenvalues and eigenvectors of $\sigma$}
+
+\textbf{Eigenvalues:}
+
+From Problem 3, we have known that $\sigma_n^2 = \operatorname{I}$. So, let $\sigma_n\ket{u} = \lambda\ket{u}$. Apply $\sigma_n$ again,
+\[\begin{aligned}
+\sigma_n^2\ket{u} &= \lambda^2\ket{u} \\
+\Rightarrow \ket{u} &= \lambda^2\ket{u} \\
+\Rightarrow \lambda^2 &= 1 \\
+\Rightarrow \lambda &= \boxed{\pm 1}
+\end{aligned}\]
+
+\textbf{Eigenvectors (explicit normalized form):}
+
+Write the unit vector $\boldsymbol{n}$ using spherical angles: \[\boldsymbol{n} = (\sin{\theta}\cos{\phi}, \sin{\theta}\sin{\phi}, \cos{\theta})\]
+
+A standard choice of normailzed eigenvectors of $\sigma_n$ is:
+
+\[\ket{n,+} = \begin{bmatrix}\cos{\frac{\theta}{2}} \\ e^{i\phi}\sin{\frac{\theta}{2}}\end{bmatrix}, \quad \ket{n,-} = \begin{bmatrix}-e^{-i\phi}\cos{\frac{\theta}{2}} \\ \cos{\frac{\theta}{2}}\end{bmatrix}\]
+
+Then,
+
+\[\begin{aligned}
+\sigma_n\ket{n,+} & = \begin{bmatrix}\cos{\theta} & e^{-i\phi}\sin{\theta} \\ e^{i\phi}\sin{\theta} & -\cos{\theta}\end{bmatrix} \begin{bmatrix}\cos{\frac{\theta}{2}} \\ e^{i\phi}\sin{\frac{\theta}{2}}\end{bmatrix} \\
+&= \begin{bmatrix}\cos{\theta}\cos{\frac{\theta}{2}} + e^{-i\phi}\sin{\theta}e^{i\phi}\sin{\frac{\theta}{2}} \\ e^{i\phi}\sin{\theta}\cos{\frac{\theta}{2}} - \cos{\theta}e^{i\phi}\sin{\frac{\theta}{2}}\end{bmatrix} \\
+& = \begin{bmatrix}\cos{\theta}\cos{\frac{\theta}{2}} + \sin{\theta}\sin{\frac{\theta}{2}} \\ e^{i\phi}(\sin{\theta}\cos{\frac{\theta}{2}} - \cos{\theta}\sin{\frac{\theta}{2}})\end{bmatrix}
+\end{aligned}\]
+
+\[\begin{aligned}
+\sigma_n\ket{n,-} & = \begin{bmatrix}\cos{\theta} & e^{-i\phi}\sin{\theta} \\ e^{i\phi}\sin{\theta} & -\cos{\theta}\end{bmatrix} \begin{bmatrix}-e^{-i\phi}\cos{\frac{\theta}{2}} \\ \cos{\frac{\theta}{2}}\end{bmatrix} \\
+&= \begin{bmatrix}-\cos{\theta}e^{-i\phi}\cos{\frac{\theta}{2}} + e^{-i\phi}\sin{\theta}\cos{\frac{\theta}{2}} \\ -e^{i\phi}\sin{\theta}e^{-i\phi}\cos{\frac{\theta}{2}} - \cos{\theta}\cos{\frac{\theta}{2}}\end{bmatrix} \\
+&= \begin{bmatrix}-e^{-i\phi}(\cos{\theta} - \sin{\theta})\cos{\frac{\theta}{2}} \\ -(\sin{\theta} + \cos{\theta})\cos{\frac{\theta}{2}}\end{bmatrix}
+\end{aligned}\]
+
+Now we have a good way to calculate the eigenvalues by using the trigonometric identities of $\cos(A-B) = \sin(A)\cos(B) - \cos(A)\sin(B)$.
+
+\[\begin{aligned}
+\sigma_n\ket{n,+} & = \begin{bmatrix}\cos{\theta}\cos{\frac{\theta}{2}} + \sin{\theta}\sin{\frac{\theta}{2}} \\ e^{i\phi}(\sin{\theta}\cos{\frac{\theta}{2}} - \cos{\theta}\sin{\frac{\theta}{2}})\end{bmatrix} \\
+&= \begin{bmatrix}\cos(\theta - \frac{\theta}{2}) \\ e^{i\phi}\sin(\theta - \frac{\theta}{2})\end{bmatrix} \\
+&= \begin{bmatrix}\cos{\frac{\theta}{2}} \\ e^{i\phi}\sin{\frac{\theta}{2}}\end{bmatrix} \\
+&= \boxed{\ket{n,+}}
+\end{aligned}\]
+
+We cannot use that way in this situtation, we could expland equations to calculate because $\cos{\theta} = \cos^2{\frac{\theta}{2}} - \sin^2{\frac{\theta}{2}}$ and $\sin{\theta} = 2\sin{\frac{\theta}{2}}\cos{\frac{\theta}{2}}$,
+
+\[\begin{aligned}
+\sigma_n\ket{n,-} &= \begin{bmatrix}-e^{-i\phi}(\cos{\theta} - \sin{\theta})\cos{\frac{\theta}{2}} \\ -(\sin{\theta} + \cos{\theta})\cos{\frac{\theta}{2}}\end{bmatrix} \\
+&= \begin{bmatrix}e^{-i\phi}\left(2\sin{\frac{\theta}{2}}\cos{\frac{\theta}{2}} - (\cos^2{\frac{\theta}{2}} - \sin^2{\frac{\theta}{2}})\right)\cos{\frac{\theta}{2}} \\ -\left(2\sin{\frac{\theta}{2}}\cos{\frac{\theta}{2}} + (\cos^2{\frac{\theta}{2}} - \sin^2{\frac{\theta}{2}})\right)\cos{\frac{\theta}{2}}\end{bmatrix} \\
+&= \begin{bmatrix}e^{-i\phi}\left(\sin^2{\frac{\theta}{2}} + \cos^2{\frac{\theta}{2}}\right)\cos{\frac{\theta}{2}} \\ -\left(\sin^2{\frac{\theta}{2}} + \cos^2{\frac{\theta}{2}}\right)\cos{\frac{\theta}{2}}\end{bmatrix} \\
+&= \begin{bmatrix}-e^{-i\phi}\cos{\frac{\theta}{2}} \\ \cos{\frac{\theta}{2}}\end{bmatrix} \\
+&= \boxed{\ket{n,-}}
+\end{aligned}\]
+
+\textbf{Part 2: Eigenvalues/eigenvectors of $R_n(\alpha)$}
+
+The key hint is the same eigenvectors.
+
+let $\sigma_n\ket{n,\pm} = \pm\ket{n,\pm}$. Then apply $R_n(\alpha)$ to same vector,
+
+\[\begin{aligned}
+R_n(\alpha)\ket{n,\pm} &= \cos(\frac{\alpha}{2}\operatorname{I} - i \sin(\frac{\alpha}{2})\sigma_n)\ket{n,\pm} \\
+&= \cos(\frac{\alpha}{2})\ket{n,\pm} - i \sin(\frac{\alpha}{2})(\pm\ket{n,\pm}) \\
+&= \left(\cos(\frac{\alpha}{2}) \mp i \sin(\frac{\alpha}{2})\right)\ket{n,\pm}
+\end{aligned}\]
+
+But, \[\cos{x} \pm i \sin{x} = e^{\mp ix}\]
+
+so, \[\boxed{R_n(\alpha)\ket{n,+} = e^{-i\frac{\alpha}{2}}\ket{n,+}, \quad R_n(\alpha)\ket{n,-} = e^{+i\frac{\alpha}{2}}\ket{n,-}}\]
+
+\textbf{Final answer summary}:
+
+\[\boxed{\text{For} \: \sigma_n: \lambda = \pm 1, \quad \ket{n,+} = \begin{bmatrix}\cos{\frac{\theta}{2}} \\ e^{i\phi}\sin{\frac{\theta}{2}}\end{bmatrix}, \quad \ket{n,-} = \begin{bmatrix}-e^{-i\phi}\cos{\frac{\theta}{2}} \\ \cos{\frac{\theta}{2}}\end{bmatrix}}\]
+
+\[\boxed{\text{For} \: R_n(\alpha): \mu_{\pm} = e^{\mp i\frac{\alpha}{2}}, \: \text{same eigenvectors} \ket{n,\pm}}\]
+
+\end{solution}
+
+\section*{Problem 5 (20 points)}
+
+(A) SHOW that the sum of dyads in the computational basis $\{\ket{0},\ket{1}\}$ is equivalent to the expression in the $\{\ket{+},\ket{-}\}$ basis
+\begin{itemize}
+    \item $\operatorname{X} = \ket{0}\bra{1} + \ket{1}\bra{0} = \ket{+}\bra{+} - \ket{-}\bra{-}$.
+    \item $\operatorname{Z} = \ket{0}\bra{0} - \ket{1}\bra{1} = \ket{+}\bra{-} + \ket{-}\bra{+}$.
+\end{itemize}
+(B)  Show that LHS=RHS and draw the quantum circuits for,
+\begin{itemize}
+    \item $\ket{0}\bra{0} \otimes \operatorname{I} + \ket{1}\bra{1} \otimes \operatorname{Z} = \operatorname{I} \otimes \ket{0}\bra{0} + \operatorname{Z} \otimes \ket{1}\ket{1}$. Note: Ctrl in the $\operatorname{Z}$ eigenbasis.
+    \item $\ket{+}\bra{+} \otimes \operatorname{I} +\ket{-}\bra{-} \otimes \operatorname{X} = \operatorname{I} \otimes \ket{+}\bra{+} + \operatorname{X} \otimes \ket{-}\bra{-}$. Note: Ctrl in the $\operatorname{X}$ eigenbasis
+\end{itemize}
+
+\begin{solution}
+
+\textbf{Part A: Preparation}
+
+\[\ket{+} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1}), \quad \ket{-} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\]
+\[\bra{+} = \frac{1}{\sqrt{2}}(\bra{0} + \bra{1}), \quad \bra{-} = \frac{1}{\sqrt{2}}(\bra{0} - \bra{1})\]
+
+\textbf{Part A: Prove $\operatorname{X} = \ket{0}\bra{1} + \ket{1}\bra{0} = \ket{+}\bra{+} - \ket{-}\bra{-}$.}
+
+\[\begin{aligned}
+\ket{+}\bra{+} &= \left(\frac{1}{\sqrt{2}}(\ket{0} + \ket{1})\right)\left(\frac{1}{\sqrt{2}}(\bra{0} + \bra{1})\right) \\ 
+&= \frac{1}{2}(\ket{0}\bra{0} + \ket{0}\bra{1} + \ket{1}\bra{0} + \ket{1}\bra{1})
+\end{aligned}\]
+
+\[\begin{aligned}
+\ket{-}\bra{-} &= \left(\frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\right)\left(\frac{1}{\sqrt{2}}(\bra{0} - \bra{1})\right) \\ 
+&= \frac{1}{2}(\ket{0}\bra{0} - \ket{0}\bra{1} - \ket{1}\bra{0} + \ket{1}\bra{1})
+\end{aligned}\]
+
+\[\begin{aligned}
+\ket{+}\bra{+} - \ket{-}\bra{-} &= \frac{1}{2}(\ket{0}\bra{0} + \ket{0}\bra{1} + \ket{1}\bra{0} + \ket{1}\bra{1}) - \frac{1}{2}(\ket{0}\bra{0} - \ket{0}\bra{1} - \ket{1}\bra{0} + \ket{1}\bra{1}) \\
+&= \ket{0}\bra{1} + \ket{1}\bra{0} \\
+&= \boxed{\operatorname{X}}
+\end{aligned}\]
+
+\textbf{Part A: Prove $\operatorname{Z} = \ket{0}\bra{0} - \ket{1}\bra{1} = \ket{+}\bra{-} + \ket{-}\bra{+}$.}
+
+\[\begin{aligned}
+\ket{+}\bra{-} &= \left(\frac{1}{\sqrt{2}}(\ket{0} + \ket{1})\right)\left(\frac{1}{\sqrt{2}}(\bra{0} - \bra{1})\right) \\ 
+&= \frac{1}{2}(\ket{0}\bra{0} + \ket{0}\bra{1} - \ket{1}\bra{0} - \ket{1}\bra{1})
+\end{aligned}\]
+
+\[\begin{aligned}
+\ket{-}\bra{+} &= \left(\frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\right)\left(\frac{1}{\sqrt{2}}(\bra{0} + \bra{1})\right) \\ 
+&= \frac{1}{2}(\ket{0}\bra{0} - \ket{0}\bra{1} + \ket{1}\bra{0} + \ket{1}\bra{1})
+\end{aligned}\]
+
+\[\begin{aligned}
+\ket{+}\bra{-} + \ket{-}\bra{+} &= \frac{1}{2}(\ket{0}\bra{0} + \ket{0}\bra{1} - \ket{1}\bra{0} - \ket{1}\bra{1}) + \frac{1}{2}(\ket{0}\bra{0} - \ket{0}\bra{1} + \ket{1}\bra{0} + \ket{1}\bra{1}) \\
+&= \ket{0}\bra{0} - \ket{1}\bra{1} \\
+&= \boxed{\operatorname{Z}}
+\end{aligned}\]
+
+\textbf{Part B: Preparation}
+
+\[\operatorname{I} = \ket{0}\bra{0} + \ket{1}\bra{1}\]
+
+A very useful identity (valid for any single-qubit operator $U$) is the following:
+
+\[\ket{0}\bra{0} \otimes \operatorname{I} + \ket{1}\bra{1} \otimes \operatorname{U}\]
+
+means: “apply $\operatorname{U}$ on the second qubit iff the first qubit is $\ket{1}$”. (control in computational/
+$\operatorname{Z}$ basis). Similarly,
+
+\[\ket{+}\bra{+} \otimes \operatorname{I} + \ket{-}\bra{-} \otimes \operatorname{U}\]
+
+means: control in the $\operatorname{X}$-basis. (control is $\ket{-}$).
+
+\textbf{Part B: Prove $\ket{0}\bra{0} \otimes \operatorname{I} + \ket{1}\bra{1} \otimes \operatorname{Z} = \operatorname{I} \otimes \ket{0}\bra{0} + \operatorname{Z} \otimes \ket{1}\ket{1}$.}
+
+\[\begin{aligned}
+\text{LHS} &= \ket{0}\bra{0} \otimes \operatorname{I} + \ket{1}\bra{1} \otimes \operatorname{Z} \\
+&= \ket{0}\bra{0} \otimes (\ket{0}\bra{0} + \ket{1}\bra{1})+ \ket{1}\bra{1} \otimes (\ket{0}\bra{0} - \ket{1}\bra{1}) \\
+&= \ket{0}\bra{0} \otimes \ket{0}\bra{0} + \ket{0}\bra{0} \otimes \ket{1}\bra{1} + \ket{1}\bra{1} \otimes \ket{0}\bra{0} - \ket{1}\bra{1} \otimes \ket{1}\bra{1} \\
+&= \boxed{\ket{00}\bra{00} + \ket{01}\bra{01} + \ket{10}\bra{10} - \ket{11}\bra{11}}
+\end{aligned}\]
+
+\[\begin{aligned}
+\text{RHS} &= \operatorname{I} \otimes \ket{0}\bra{0} + \operatorname{Z} \otimes \ket{1}\bra{1} \\
+&= (\ket{0}\bra{0} + \ket{1}\bra{1}) \otimes \ket{0}\bra{0} + (\ket{0}\bra{0} - \ket{1}\bra{1}) \otimes \ket{1}\bra{1} \\
+&= \ket{0}\bra{0} \otimes \ket{0}\bra{0} + \ket{1}\bra{1} \otimes \ket{0}\bra{0} + \ket{0}\bra{0} \otimes \ket{1}\bra{1} - \ket{1}\bra{1} \otimes \ket{1}\bra{1} \\
+&= \boxed{\ket{00}\bra{00} + \ket{01}\bra{01} + \ket{10}\bra{10} - \ket{11}\bra{11}}
+\end{aligned}\]
+
+Therefore, \[\boxed{\text{LHS} = \text{RHS}}\]
+
+\textbf{Part B: Prove $\ket{+}\bra{+} \otimes \operatorname{I} +\ket{-}\bra{-} \otimes \operatorname{X} = \operatorname{I} \otimes \ket{+}\bra{+} + \operatorname{X} \otimes \ket{-}\bra{-}$.}
+
+\[\ket{+}\bra{+} = \frac{1}{2}(\operatorname{I} + \operatorname{X}), \quad \ket{-}\bra{-} = \frac{1}{2}(\operatorname{I} - \operatorname{X})\]
+
+\[\begin{aligned}
+\text{LHS} &= \ket{+}\bra{+} \otimes \operatorname{I} +\ket{-}\bra{-} \otimes \operatorname{X} \\
+&= \frac{1}{2}(\operatorname{I} + \operatorname{X}) \otimes \operatorname{I} + \frac{1}{2}(\operatorname{I} - \operatorname{X}) \otimes \operatorname{X} \\
+&= \frac{1}{2}(\operatorname{I} \otimes \operatorname{I} + \operatorname{X} \otimes \operatorname{I}) + \frac{1}{2}(\operatorname{I} \otimes \operatorname{X} - \operatorname{X} \otimes \operatorname{X}) \\
+&= \boxed{\frac{1}{2}(\operatorname{I} \otimes \operatorname{I} + \operatorname{I} \otimes \operatorname{X} + \operatorname{X} \otimes \operatorname{I} - \operatorname{X} \otimes \operatorname{X})}
+\end{aligned}\]
+
+\[\begin{aligned}
+\text{RHS} &= \operatorname{I} \otimes \ket{+}\bra{+} + \operatorname{X} \otimes \ket{-}\bra{-} \\
+&= \operatorname{I} \otimes \frac{1}{2}(\operatorname{I} + \operatorname{X}) + \operatorname{X} \otimes \frac{1}{2}(\operatorname{I} - \operatorname{X}) \\
+&= \frac{1}{2}(\operatorname{I} \otimes \operatorname{I} + \operatorname{I} \otimes \operatorname{X}) + \frac{1}{2}(\operatorname{X} \otimes \operatorname{I} - \operatorname{X} \otimes \operatorname{X}) \\
+&= \boxed{\frac{1}{2}(\operatorname{I} \otimes \operatorname{I} + \operatorname{I} \otimes \operatorname{X} + \operatorname{X} \otimes \operatorname{I} - \operatorname{X} \otimes \operatorname{X})}
+\end{aligned}\]
+
+So \[\boxed{\text{LHS} = \text{RHS}}\]
+
+\textbf{Part B: Quantum Circuit Diagrams}
+
+The figure below shows the quantum circuit equivalences for both equations:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{HW2_code/problem5_all_circuits.png}
+\caption{Quantum circuit equivalences for Problem 5(B). \textbf{Top row (Equation 1)}: Controlled-Z gate is symmetric—swapping control and target gives the same operation. \textbf{Bottom row (Equation 2)}: Controlled-X with control in the X-basis (using Hadamard gates) is also symmetric.}
+\label{fig:problem5_circuits}
+\end{figure}
+
+\end{solution}
+
+\section*{Problem 6 (10 points)}
+
+For $\ket{\psi} = \frac{1}{\sqrt{2}} (1,-1)^T$ and $\ket{\phi} = \frac{1}{\sqrt{3}} (\sqrt{2},i)^T$, find $(\ket{i}\bra{j})\ket{\psi}$ and $(\ket{i}\bra{j})\ket{\phi}$.
+
+\begin{solution}
+
+Given:
+\[\ket{\psi} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ -1\end{bmatrix}, \quad \ket{\phi} = \frac{1}{\sqrt{3}}\begin{bmatrix}\sqrt{2} \\ i\end{bmatrix}\]
+
+\[\ket{0} = \begin{bmatrix}1 \\ 0\end{bmatrix}, \quad \ket{1} = \begin{bmatrix}0 \\ 1\end{bmatrix}, \quad \bra{0} = \begin{bmatrix}1 & 0\end{bmatrix}, \quad \bra{1} = \begin{bmatrix}0 & 1\end{bmatrix}\]
+
+\textbf{Part 1: Compute $(\ket{i}\bra{j})\ket{\psi}$ for all $i,j \in \{0,1\}$}
+
+\textbf{Case $j=0$:}
+
+First compute $\bra{0}\ket{\psi}$:
+\[\bra{0}\ket{\psi} = \begin{bmatrix}1 & 0\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ -1\end{bmatrix} = \frac{1}{\sqrt{2}}\]
+
+So:
+\[(\ket{0}\bra{0})\ket{\psi} = \ket{0}(\bra{0}\ket{\psi}) = \frac{1}{\sqrt{2}}\ket{0}\]
+
+\[(\ket{1}\bra{0})\ket{\psi} = \ket{1}(\bra{0}\ket{\psi}) = \frac{1}{\sqrt{2}}\ket{1}\]
+
+\textbf{Case $j=1$:}
+
+First compute $\bra{1}\ket{\psi}$:
+\[\bra{1}\ket{\psi} = \begin{bmatrix}0 & 1\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ -1\end{bmatrix} = -\frac{1}{\sqrt{2}}\]
+
+So:
+\[(\ket{0}\bra{1})\ket{\psi} = \ket{0}(\bra{1}\ket{\psi}) = -\frac{1}{\sqrt{2}}\ket{0}\]
+
+\[(\ket{1}\bra{1})\ket{\psi} = \ket{1}(\bra{1}\ket{\psi}) = -\frac{1}{\sqrt{2}}\ket{1}\]
+
+\textbf{Summary for $\ket{\psi}$:}
+
+\[\boxed{\begin{aligned}
+(\ket{0}\bra{0})\ket{\psi} &= \frac{1}{\sqrt{2}}\ket{0} \\
+(\ket{1}\bra{0})\ket{\psi} &= \frac{1}{\sqrt{2}}\ket{1} \\
+(\ket{0}\bra{1})\ket{\psi} &= -\frac{1}{\sqrt{2}}\ket{0} \\
+(\ket{1}\bra{1})\ket{\psi} &= -\frac{1}{\sqrt{2}}\ket{1}
+\end{aligned}}\]
+
+\textbf{Part 2: Compute $(\ket{i}\bra{j})\ket{\phi}$ for all $i,j \in \{0,1\}$}
+
+\textbf{Case $j=0$:}
+
+First compute $\bra{0}\ket{\phi}$:
+\[\bra{0}\ket{\phi} = \begin{bmatrix}1 & 0\end{bmatrix}\frac{1}{\sqrt{3}}\begin{bmatrix}\sqrt{2} \\ i\end{bmatrix} = \frac{\sqrt{2}}{\sqrt{3}}\]
+
+So:
+\[(\ket{0}\bra{0})\ket{\phi} = \ket{0}(\bra{0}\ket{\phi}) = \frac{\sqrt{2}}{\sqrt{3}}\ket{0}\]
+
+\[(\ket{1}\bra{0})\ket{\phi} = \ket{1}(\bra{0}\ket{\phi}) = \frac{\sqrt{2}}{\sqrt{3}}\ket{1}\]
+
+\textbf{Case $j=1$:}
+
+First compute $\bra{1}\ket{\phi}$:
+\[\bra{1}\ket{\phi} = \begin{bmatrix}0 & 1\end{bmatrix}\frac{1}{\sqrt{3}}\begin{bmatrix}\sqrt{2} \\ i\end{bmatrix} = \frac{i}{\sqrt{3}}\]
+
+So:
+\[(\ket{0}\bra{1})\ket{\phi} = \ket{0}(\bra{1}\ket{\phi}) = \frac{i}{\sqrt{3}}\ket{0}\]
+
+\[(\ket{1}\bra{1})\ket{\phi} = \ket{1}(\bra{1}\ket{\phi}) = \frac{i}{\sqrt{3}}\ket{1}\]
+
+\textbf{Summary for $\ket{\phi}$:}
+
+\[\boxed{\begin{aligned}
+(\ket{0}\bra{0})\ket{\phi} &= \frac{\sqrt{2}}{\sqrt{3}}\ket{0} \\
+(\ket{1}\bra{0})\ket{\phi} &= \frac{\sqrt{2}}{\sqrt{3}}\ket{1} \\
+(\ket{0}\bra{1})\ket{\phi} &= \frac{i}{\sqrt{3}}\ket{0} \\
+(\ket{1}\bra{1})\ket{\phi} &= \frac{i}{\sqrt{3}}\ket{1}
+\end{aligned}}\]
+
+\end{solution}
+
+\section*{Problem 7 (25 points)}
+
+Write down the Dyad expressions (i.e., \textit{outer} products) in the computational
+basis for the following 1, 2 and 3-qubit gates, respectively. Also write down the
+corresponding matrix representations in the computational basis: \\
+(1) $\operatorname{H}$, \\
+(2) $\operatorname{CNOT}$ where the 2nd qubit is the control, \\
+(3) $\operatorname{CZ}$ where the 2nd qubit is the control, \\
+(4) SWAP. Note: From its definition, write it dyads in the computational basis, \\
+(5) Toffoli gate where the 2nd qubit is the Target.
+
+\textbf{Hint 1}: \textit{Carefully apply the definitions of each gate and write down the operator remembering that each dyad $\ket{\Psi}\bra{\Phi}$ means if $\ket{\Phi}$ is the input, then $\ket{\Psi}$ is the output. For example, Z-gate is defined as: Z flips the sign for $\ket{1}$ state, but leaves $\ket{0}$ alone $\boldsymbol{\rightarrow} \operatorname{Z} = \ket{0}\bra{0} - \ket{1}\bra{1}$. Another example, $\operatorname{H}$ sends $\ket{0}$ to $\ket{+}$ and $\ket{1}$ to $\ket{-} \boldsymbol{\rightarrow} \operatorname{H} = \ket{+}\bra{0} + \ket{-}\bra{1}$. $\operatorname{H}$ sends $\ket{+}\bra{0} + \ket{-}\bra{1} \boldsymbol{\rightarrow} \operatorname{H} = \ket{0}\bra{+} + \ket{1}\bra{-}$. You can
+convert either expression to that all in the computational basis.}
+
+\textbf{Hint 2}: \textit{For the multi-qubit gates, first write down as the tensor products of single qubit dyads (or operators), then convert it to the computational basis. For example, Controlled-Z with the first qubit as the Control: $\operatorname{CZ} = \ket{0}\bra{0} \otimes \operatorname{I} + \ket{1}\bra{1} \otimes \operatorname{Z}$. You can change I and Z to the sum of dyads: $\operatorname{I} = \ket{0}\bra{0} + \ket{1}\bra{1}$ and $\operatorname{Z} = \ket{0}\bra{0} - \ket{1}\bra{1}$, and carry out the tensor, which will give $CZ$ as the sum of dyads in the computational basis.}
+
+\begin{solution}
+
+\textbf{(1) Hadamard gate H}
+
+\textbf{Action:} $\operatorname{H}\ket{0} = \ket{+} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$, $\operatorname{H}\ket{1} = \ket{-} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$
+
+\textbf{Dyad expression (using $\ket{\pm}$ basis):}
+\[\operatorname{H} = \ket{+}\bra{0} + \ket{-}\bra{1}\]
+
+\textbf{Dyad expression (computational basis):}
+
+Substitute $\ket{+}$ and $\ket{-}$:
+\[\begin{aligned}
+\operatorname{H} &= \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})\bra{0} + \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})\bra{1} \\
+&= \frac{1}{\sqrt{2}}\ket{0}\bra{0} + \frac{1}{\sqrt{2}}\ket{1}\bra{0} + \frac{1}{\sqrt{2}}\ket{0}\bra{1} - \frac{1}{\sqrt{2}}\ket{1}\bra{1}
+\end{aligned}\]
+
+\[\boxed{\operatorname{H} = \frac{1}{\sqrt{2}}(\ket{0}\bra{0} + \ket{0}\bra{1} + \ket{1}\bra{0} - \ket{1}\bra{1})}\]
+
+\textbf{Matrix representation:}
+\[\boxed{\operatorname{H} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1 \\ 1 & -1\end{bmatrix}}\]
+
+\textbf{(2) CNOT where 2nd qubit is control}
+
+\textbf{Action:} Flip the 1st qubit (target) if the 2nd qubit (control) is $\ket{1}$
+
+\[\ket{00} \to \ket{00}, \quad \ket{01} \to \ket{11}, \quad \ket{10} \to \ket{10}, \quad \ket{11} \to \ket{01}\]
+
+\textbf{Dyad expression (tensor product form):}
+\[\operatorname{CNOT} = \operatorname{I} \otimes \ket{0}\bra{0} + \operatorname{X} \otimes \ket{1}\bra{1}\]
+
+\textbf{Dyad expression (computational basis):}
+
+Expand using $\operatorname{I} = \ket{0}\bra{0} + \ket{1}\bra{1}$ and $\operatorname{X} = \ket{0}\bra{1} + \ket{1}\bra{0}$:
+\[\begin{aligned}
+\operatorname{CNOT} &= (\ket{0}\bra{0} + \ket{1}\bra{1}) \otimes \ket{0}\bra{0} + (\ket{0}\bra{1} + \ket{1}\bra{0}) \otimes \ket{1}\bra{1} \\
+&= \ket{0}\bra{0} \otimes \ket{0}\bra{0} + \ket{1}\bra{1} \otimes \ket{0}\bra{0} + \ket{0}\bra{1} \otimes \ket{1}\bra{1} + \ket{1}\bra{0} \otimes \ket{1}\bra{1}
+\end{aligned}\]
+
+\[\boxed{\operatorname{CNOT} = \ket{00}\bra{00} + \ket{10}\bra{10} + \ket{01}\bra{11} + \ket{11}\bra{01}}\]
+
+\textbf{Matrix representation (basis order: $\ket{00}, \ket{01}, \ket{10}, \ket{11}$):}
+\[\boxed{\operatorname{CNOT} = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0\end{bmatrix}}\]
+
+\textbf{(3) CZ where 2nd qubit is control}
+
+\textbf{Action:} Apply Z to 1st qubit if 2nd qubit is $\ket{1}$. (Note: CZ is symmetric)
+
+\[\ket{00} \to \ket{00}, \quad \ket{01} \to \ket{01}, \quad \ket{10} \to \ket{10}, \quad \ket{11} \to -\ket{11}\]
+
+\textbf{Dyad expression (tensor product form):}
+\[\operatorname{CZ} = \operatorname{I} \otimes \ket{0}\bra{0} + \operatorname{Z} \otimes \ket{1}\bra{1}\]
+
+\textbf{Dyad expression (computational basis):}
+
+Expand using $\operatorname{I} = \ket{0}\bra{0} + \ket{1}\bra{1}$ and $\operatorname{Z} = \ket{0}\bra{0} - \ket{1}\bra{1}$:
+\[\begin{aligned}
+\operatorname{CZ} &= (\ket{0}\bra{0} + \ket{1}\bra{1}) \otimes \ket{0}\bra{0} + (\ket{0}\bra{0} - \ket{1}\bra{1}) \otimes \ket{1}\bra{1} \\
+&= \ket{0}\bra{0} \otimes \ket{0}\bra{0} + \ket{1}\bra{1} \otimes \ket{0}\bra{0} + \ket{0}\bra{0} \otimes \ket{1}\bra{1} - \ket{1}\bra{1} \otimes \ket{1}\bra{1}
+\end{aligned}\]
+
+\[\boxed{\operatorname{CZ} = \ket{00}\bra{00} + \ket{10}\bra{10} + \ket{01}\bra{01} - \ket{11}\bra{11}}\]
+
+\textbf{Matrix representation:}
+\[\boxed{\operatorname{CZ} = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & -1\end{bmatrix}}\]
+
+\textbf{(4) SWAP gate}
+
+\textbf{Action:} Exchange the two qubits
+
+\[\ket{00} \to \ket{00}, \quad \ket{01} \to \ket{10}, \quad \ket{10} \to \ket{01}, \quad \ket{11} \to \ket{11}\]
+
+\textbf{Dyad expression (computational basis):}
+\[\boxed{\operatorname{SWAP} = \ket{00}\bra{00} + \ket{10}\bra{01} + \ket{01}\bra{10} + \ket{11}\bra{11}}\]
+
+\textbf{Matrix representation:}
+\[\boxed{\operatorname{SWAP} = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1\end{bmatrix}}\]
+
+\textbf{(5) Toffoli gate where 2nd qubit is Target}
+
+\textbf{Action:} The 1st and 3rd qubits are controls. Flip the 2nd qubit (target) if both controls are $\ket{1}$.
+
+Qubit order: (1st, 2nd, 3rd)
+
+\[\begin{aligned}
+\ket{000} &\to \ket{000}, \quad \ket{001} \to \ket{001}, \quad \ket{010} \to \ket{010}, \quad \ket{011} \to \ket{011} \\
+\ket{100} &\to \ket{100}, \quad \ket{101} \to \ket{111}, \quad \ket{110} \to \ket{110}, \quad \ket{111} \to \ket{101}
+\end{aligned}\]
+
+\textbf{Dyad expression (tensor product form):}
+\[\operatorname{Toffoli} = \ket{0}\bra{0} \otimes \operatorname{I} \otimes \operatorname{I} + \ket{1}\bra{1} \otimes \operatorname{I} \otimes \ket{0}\bra{0} + \ket{1}\bra{1} \otimes \operatorname{X} \otimes \ket{1}\bra{1}\]
+
+\textbf{Dyad expression (computational basis):}
+\[\begin{aligned}
+\operatorname{Toffoli} = &\ket{000}\bra{000} + \ket{001}\bra{001} + \ket{010}\bra{010} + \ket{011}\bra{011} \\
+&+ \ket{100}\bra{100} + \ket{101}\bra{111} + \ket{110}\bra{110} + \ket{111}\bra{101}
+\end{aligned}\]
+
+\[\boxed{\operatorname{Toffoli} = \ket{000}\bra{000} + \ket{001}\bra{001} + \ket{010}\bra{010} + \ket{011}\bra{011} + \ket{100}\bra{100} + \ket{111}\bra{101} + \ket{110}\bra{110} + \ket{101}\bra{111}}\]
+
+\textbf{Matrix representation (basis order: $\ket{000}, \ket{001}, \ket{010}, \ket{011}, \ket{100}, \ket{101}, \ket{110}, \ket{111}$):}
+\[\boxed{\operatorname{Toffoli} = \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0
+\end{bmatrix}}\]
+
+\end{solution}
+
+\end{document}

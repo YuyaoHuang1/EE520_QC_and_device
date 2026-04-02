@@ -1,0 +1,776 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, physics}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{amsmath}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newenvironment{solution}
+{\par\noindent\textbf{Solution:}\par}
+{\vspace{1em}}
+
+\title{Homework Assignment No.1 \\ EE520/EE459 \\ Yuyao Huang}
+\date{}
+\begin{document}
+\maketitle
+
+\textbf{Total: 70 points} \\
+\textbf{Submit: a single PDF file of all your work}
+
+\section*{Problem 1 (10 points)}
+From the definition, write down the Bloch sphere coordinates $(\theta,\phi)$ for the points of intercept on the $x,y,z$ axes by the Bloch sphere:
+\[
+(x,y,z)=(+1,0,0)=\ket{+},\;
+(-1,0,0)=\ket{-},\;
+(0,+1,0),\;
+(0,-1,0),\;
+(0,0,+1)=\ket{0},\;
+(0,0,-1)=\ket{1}.
+\]
+Sketch the Bloch sphere and indicate the resulting states in terms of $\ket{0}, \ket{1}$ and their superposition.
+
+\begin{solution}
+
+The question gives the key information indicating that six special points on the Bloch sphere correspond to specific quantum states.
+
+\begin{itemize}
+\item $x$-axis $\rightarrow$ Hadamard phase basis ($\ket{+}$, $\ket{-}$),
+\item $y$-axis $\rightarrow$ complex basis ($\ket{+i}$, $\ket{-i}$),
+\item $z$-axis $\rightarrow$ computational basis ($\ket{0}$, $\ket{1}$).
+\end{itemize}
+
+So this information tells us there are three axes with positive and negative directions on the Bloch sphere.
+
+We now determine the quantum state corresponding to each axis intercept by solving the eigenvalue equations of the Pauli operators. 
+Let an arbitrary single–qubit state be written in the computational basis as
+\[
+\ket{\psi}=a\ket{0}+b\ket{1}=\begin{bmatrix}a\\ b\end{bmatrix}, 
+\qquad a,b\in\mathbb{C},
+\]
+with normalization $|a|^2+|b|^2=1$.
+
+The Pauli matrices are
+\[
+X=\begin{bmatrix}0&1\\1&0\end{bmatrix},\qquad
+Y=\begin{bmatrix}0&-i\\ i&0\end{bmatrix},\qquad
+Z=\begin{bmatrix}1&0\\0&-1\end{bmatrix}.
+\]
+
+\textbf{Z-axis intercepts.}
+
+For the north pole $(0,0,+1)$ we solve $Z\ket{\psi}=+\ket{\psi}$:
+\[
+\begin{bmatrix}1&0\\0&-1\end{bmatrix}
+\begin{bmatrix}a\\ b\end{bmatrix}
+=
+\begin{bmatrix}a\\ b\end{bmatrix}
+\Rightarrow
+\begin{bmatrix}a\\ -b\end{bmatrix}
+=
+\begin{bmatrix}a\\ b\end{bmatrix}
+\Rightarrow b=0.
+\]
+After normalization, $\ket{\psi}=\ket{0}$.
+
+For the south pole $(0,0,-1)$ we solve $Z\ket{\psi}=-\ket{\psi}$:
+\[
+\begin{bmatrix}a\\ -b\end{bmatrix}
+=
+\begin{bmatrix}-a\\ -b\end{bmatrix}
+\Rightarrow a=0,
+\]
+which gives $\ket{\psi}=\ket{1}$.
+
+\textbf{X-axis intercepts.}
+
+For $(+1,0,0)$ we solve $X\ket{\psi}=+\ket{\psi}$:
+\[
+\begin{bmatrix}0&1\\1&0\end{bmatrix}
+\begin{bmatrix}a\\ b\end{bmatrix}
+=
+\begin{bmatrix}a\\ b\end{bmatrix}
+\Rightarrow
+\begin{bmatrix}b\\ a\end{bmatrix}
+=
+\begin{bmatrix}a\\ b\end{bmatrix}
+\Rightarrow b=a.
+\]
+Normalization gives
+\[
+\ket{+}=\frac{1}{\sqrt2}(\ket{0}+\ket{1}).
+\]
+
+For $(-1,0,0)$ we solve $X\ket{\psi}=-\ket{\psi}$:
+\[
+\begin{bmatrix}b\\ a\end{bmatrix}
+=
+\begin{bmatrix}-a\\ -b\end{bmatrix}
+\Rightarrow b=-a,
+\]
+yielding
+\[
+\ket{-}=\frac{1}{\sqrt2}(\ket{0}-\ket{1}).
+\]
+
+\textbf{Y-axis intercepts.}
+
+For $(0,+1,0)$ we solve $Y\ket{\psi}=+\ket{\psi}$:
+\[
+\begin{bmatrix}0&-i\\ i&0\end{bmatrix}
+\begin{bmatrix}a\\ b\end{bmatrix}
+=
+\begin{bmatrix}a\\ b\end{bmatrix}
+\Rightarrow
+\begin{bmatrix}-ib\\ ia\end{bmatrix}
+=
+\begin{bmatrix}a\\ b\end{bmatrix}.
+\]
+This gives $b=ia$, and after normalization,
+\[
+\ket{+i}=\frac{1}{\sqrt2}(\ket{0}+i\ket{1}).
+\]
+
+For $(0,-1,0)$ we solve $Y\ket{\psi}=-\ket{\psi}$:
+\[
+\begin{bmatrix}-ib\\ ia\end{bmatrix}
+=
+\begin{bmatrix}-a\\ -b\end{bmatrix}
+\Rightarrow b=-ia,
+\]
+which gives
+\[
+\ket{-i}=\frac{1}{\sqrt2}(\ket{0}-i\ket{1}).
+\]
+
+\textbf{Bloch sphere angles.}
+
+Any pure qubit state can be written as
+\[
+\ket{\psi}=\cos\frac{q}{2}\ket{0}+e^{ij}\sin\frac{q}{2}\ket{1}.
+\]
+From the amplitudes of each state we obtain
+
+\[
+\boxed{\begin{aligned}
+(0,0,+1)&:\ \ket{0} \Rightarrow (q,j)=(0,0),\\
+(0,0,-1)&:\ \ket{1} \Rightarrow (q,j)=(\pi,0),\\
+(+1,0,0)&:\ \ket{+} \Rightarrow (q,j)=\left(\frac{\pi}{2},0\right),\\
+(-1,0,0)&:\ \ket{-} \Rightarrow (q,j)=\left(\frac{\pi}{2},\pi\right),\\
+(0,+1,0)&:\ \ket{+i} \Rightarrow (q,j)=\left(\frac{\pi}{2},\frac{\pi}{2}\right),\\
+(0,-1,0)&:\ \ket{-i} \Rightarrow (q,j)=\left(\frac{\pi}{2},\frac{3\pi}{2}\right).
+\end{aligned}}
+\]
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{bloch_sphere.png}
+\caption{Bloch sphere showing the six basis states at axis intercepts.}
+\end{figure}
+
+\end{solution}
+
+\section*{Problem 2 (5 points)}
+Using the matrix representation of the Hadamard gate $H$ and the single-qubit states, find
+\[
+H\ket{0},\quad H\ket{1},\quad H\ket{+},\quad H\ket{-}
+\]
+where
+\[
+\ket{\pm}=\frac{1}{\sqrt{2}}(\ket{0}\pm\ket{1}).
+\]
+
+\begin{solution}
+
+\textbf{1. preparation, write all objects as "matrix/vector"}
+\textbf{1.1. Computational basis}
+At the standard condition, we have
+\[
+\ket{0}=\begin{bmatrix}1\\0\end{bmatrix},\quad
+\ket{1}=\begin{bmatrix}0\\1\end{bmatrix}.
+\]
+
+\textbf{1.2. Hadamard gate}
+The matrix representation of the Hadamard gate is
+\[
+H = \frac{1}{\sqrt{2}} \begin{bmatrix}1&1\\1&-1\end{bmatrix}.
+\]
+
+\textbf{1.3. Formation of $|+\rangle$, $|-\rangle$}
+\[
+\ket{+} = \frac{1}{\sqrt{2}} (\ket{0} + \ket{1}) = \frac{1}{\sqrt{2}} \left(\begin{bmatrix}1\\0\end{bmatrix} + \begin{bmatrix}0\\1\end{bmatrix}\right) = \frac{1}{\sqrt{2}} \begin{bmatrix}1\\1\end{bmatrix} 
+\]
+\[
+\ket{-} = \frac{1}{\sqrt{2}} (\ket{0} - \ket{1}) = \frac{1}{\sqrt{2}} \left(\begin{bmatrix}1\\0\end{bmatrix} - \begin{bmatrix}0\\1\end{bmatrix}\right) = \frac{1}{\sqrt{2}} \begin{bmatrix}1\\-1\end{bmatrix}
+\]
+
+\textbf{2. $H|0\rangle$ computation}
+\[
+H\ket{0} = \left(\frac{1}{\sqrt{2}} \begin{bmatrix}1&1\\1&-1\end{bmatrix}\right) \begin{bmatrix}1\\0\end{bmatrix} = \frac{1}{\sqrt{2}} \left(\begin{bmatrix}1&1\\1&-1\end{bmatrix} \begin{bmatrix}1\\0\end{bmatrix}\right) = \frac{1}{\sqrt{2}} \begin{bmatrix}1 \cdot 1 + 1 \cdot 0\\1 \cdot 1 + (-1) \cdot 0\end{bmatrix} = \frac{1}{\sqrt{2}} \begin{bmatrix}1\\1\end{bmatrix} = \ket{+}
+\]
+
+\textbf{3. $H|1\rangle$ computation}
+\[
+H\ket{1} = \left(\frac{1}{\sqrt{2}} \begin{bmatrix}1&1\\1&-1\end{bmatrix}\right) \begin{bmatrix}0\\1\end{bmatrix} = \frac{1}{\sqrt{2}} \left(\begin{bmatrix}1&1\\1&-1\end{bmatrix} \begin{bmatrix}0\\1\end{bmatrix}\right) = \frac{1}{\sqrt{2}} \begin{bmatrix}1 \cdot 0 + 1 \cdot 1\\1 \cdot 0 + (-1) \cdot 1\end{bmatrix} = \frac{1}{\sqrt{2}} \begin{bmatrix}1\\-1\end{bmatrix} = \ket{-}
+\]
+
+\textbf{4. $H|+\rangle$ computation}
+\[
+H\ket{+} = \left(\frac{1}{\sqrt{2}} \begin{bmatrix}1&1\\1&-1\end{bmatrix}\right) \left(\frac{1}{\sqrt{2}} \begin{bmatrix}1\\1\end{bmatrix}\right) = \frac{1}{2} \begin{bmatrix}1&1\\1&-1\end{bmatrix} \begin{bmatrix}1\\1\end{bmatrix} = \frac{1}{2} \begin{bmatrix}1\cdot 1 + 1 \cdot 1\\1 \cdot 1 + (-1) \cdot 1\end{bmatrix} = \frac{1}{2} \begin{bmatrix}2\\0\end{bmatrix} = \begin{bmatrix}1\\0\end{bmatrix} = \ket{0}
+\]
+
+\textbf{5. $H|-\rangle$ computation}
+\[
+H\ket{-} = \left(\frac{1}{\sqrt{2}} \begin{bmatrix}1&1\\1&-1\end{bmatrix}\right) \left(\frac{1}{\sqrt{2}} \begin{bmatrix}1\\-1\end{bmatrix}\right) = \frac{1}{2} \begin{bmatrix}1&1\\1&-1\end{bmatrix} \begin{bmatrix}1\\-1\end{bmatrix} = \frac{1}{2} \begin{bmatrix}1\cdot 1 + 1 \cdot (-1)\\1 \cdot 1 + (-1) \cdot (-1)\end{bmatrix} = \frac{1}{2} \begin{bmatrix}0\\2\end{bmatrix} = \begin{bmatrix}0\\1\end{bmatrix} = \ket{1}
+\]
+
+\textbf{Results summary}
+\[\boxed{H\ket{0} = \ket{+}}\]
+\[\boxed{H\ket{1} = \ket{-}}\]
+\[\boxed{H\ket{+} = \ket{0}}\]
+\[\boxed{H\ket{-} = \ket{1}}\]
+
+\end{solution}
+
+\section*{Problem 3 (10 points)}
+Using matrix representations evaluate
+\[
+X^2,\quad Y^2,\quad Z^2,\quad H^2,\quad S^2,\quad T^2.
+\]
+\begin{solution}
+
+\textbf{1. preparation, write all objects as "matrix/vector"}
+\textbf{1.1. Pauli matrices and gates}
+\[
+X = \begin{bmatrix}0&1\\1&0\end{bmatrix}, \quad Y = \begin{bmatrix}0&-i\\i&0\end{bmatrix}, \quad Z = \begin{bmatrix}1&0\\0&-1\end{bmatrix}
+\]
+
+\textbf{1.2. Hadamard gate}
+\[
+H = \frac{1}{\sqrt{2}}\begin{bmatrix}1&1\\1&-1\end{bmatrix}
+\]
+
+\textbf{1.3. Phase gates}
+\[
+S = \begin{bmatrix}1&0\\0&i\end{bmatrix}, \quad T = \begin{bmatrix}1&0\\0&e^{i\pi/4}\end{bmatrix}
+\]
+
+\textbf{2. computations}
+\[
+X^2 = XX = \begin{bmatrix}0&1\\1&0\end{bmatrix} \begin{bmatrix}0&1\\1&0\end{bmatrix} = \begin{bmatrix}0 \cdot 0 + 1 \cdot 1&0 \cdot 1 + 1 \cdot 0\\1 \cdot 0 + 0 \cdot 1&1 \cdot 1 + 0 \cdot 0\end{bmatrix} = \begin{bmatrix}1&0\\0&1\end{bmatrix} = \boxed{I}
+\]
+
+\[
+Y^2 = YY = \begin{bmatrix}0&-i\\i&0\end{bmatrix} \begin{bmatrix}0&-i\\i&0\end{bmatrix} = \begin{bmatrix}0 \cdot 0 + (-i) \cdot i&0 \cdot (-i) + (-i) \cdot 0\\i \cdot 0 + 0 \cdot i&i \cdot (-i) + 0 \cdot 0\end{bmatrix} = \begin{bmatrix}1&0\\0&1\end{bmatrix} = \boxed{I} \text{ with } i^2 = -1
+\]
+
+\[
+Z^2 = ZZ = \begin{bmatrix}1&0\\0&-1\end{bmatrix} \begin{bmatrix}1&0\\0&-1\end{bmatrix} = \begin{bmatrix}1 \cdot 1 + 0 \cdot 0&1 \cdot 0 + 0 \cdot (-1)\\0 \cdot 1 + (-1) \cdot 0&0 \cdot 0 + (-1) \cdot (-1)\end{bmatrix} = \begin{bmatrix}1&0\\0&1\end{bmatrix} = \boxed{I}
+\]
+
+\[
+\begin{aligned}
+H^2 &= HH \\
+&= \left(\frac{1}{\sqrt{2}}
+\begin{bmatrix}
+1 & 1\\
+1 & -1
+\end{bmatrix}\right)
+\left(\frac{1}{\sqrt{2}}
+\begin{bmatrix}
+1 & 1\\
+1 & -1
+\end{bmatrix}\right) \\
+&= \frac{1}{2}
+\begin{bmatrix}
+1 & 1\\
+1 & -1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 1\\
+1 & -1
+\end{bmatrix} \\
+&= \frac{1}{2}
+\begin{bmatrix}
+1\cdot1 + 1\cdot1 & 1\cdot1 + 1\cdot(-1)\\
+1\cdot1 + (-1)\cdot1 & 1\cdot1 + (-1)\cdot(-1)
+\end{bmatrix} \\
+&= \frac{1}{2}
+\begin{bmatrix}
+2 & 0\\
+0 & 2
+\end{bmatrix} \\
+&=
+\begin{bmatrix}
+1 & 0\\
+0 & 1
+\end{bmatrix}
+= \boxed{I}
+\end{aligned}
+\]
+
+\[
+S^2 = SS = \begin{bmatrix}1&0\\0&i\end{bmatrix} \begin{bmatrix}1&0\\0&i\end{bmatrix} = \begin{bmatrix}1 \cdot 1 + 0 \cdot 0&1 \cdot 0 + 0 \cdot i\\0 \cdot 1 + i \cdot 0&0 \cdot 0 + i \cdot i\end{bmatrix} = \begin{bmatrix}1&0\\0&-1\end{bmatrix} = \boxed{Z}
+\]
+
+\[
+T^2 = TT = \begin{bmatrix}1&0\\0&e^{i\pi/4}\end{bmatrix} \begin{bmatrix}1&0\\0&e^{i\pi/4}\end{bmatrix} = \begin{bmatrix}1 \cdot 1 + 0 \cdot 0&1 \cdot 0 + 0 \cdot e^{i\pi/4}\\0 \cdot 1 + e^{i\pi/4} \cdot 0&0 \cdot 0 + e^{i\pi/4} \cdot e^{i\pi/4}\end{bmatrix} = \begin{bmatrix}1&0\\0&e^{i\pi/2}\end{bmatrix} = \boxed{S} \text{ with } e^{i\pi/2} = i
+\]
+
+\end{solution}
+
+\section*{Problem 4 (15 points)}
+Apply the following definitions:
+
+\[
+U \text{ is a unitary operator if } U^\dagger U = I
+\]
+\[
+U \text{ is a Hermitian if } U^\dagger = U
+\]
+
+For each of the single qubit operators: $H, X, Y, Z, S, T,$ and $R_x(-\pi/2)$, determine:
+
+\begin{itemize}
+\item Is it unitary?
+\item Is it Hermitian?
+\end{itemize}
+
+Hint: The rotation operator for $-90^\circ$ about the $x$-axis:
+\[
+R_n(\alpha)=\exp\left(-i\,\mathbf{n}\cdot\boldsymbol{\sigma}\,\frac{\alpha}{2}\right)
+=\cos\left(\frac{\alpha}{2}\right)-i\,\mathbf{n}\cdot\boldsymbol{\sigma}\sin\left(\frac{\alpha}{2}\right)
+\]
+where $\mathbf{n}$ is the axis of rotation and $\boldsymbol{\sigma}=iX + jY + kZ$.
+
+\begin{solution}
+
+\textbf{1. Start from the standard rotation operator}
+
+\textbf{1.1. Standard rotation operator}
+\[
+R_n(\alpha) = \exp\left(-i \frac{\alpha}{2} \mathbf{n} \cdot \boldsymbol{\sigma} \right)
+\]
+It represents the unitary operator that rotates a qubit state by angle $\alpha$ about the axis $\mathbf{n}$ on the Bloch sphere, which is responsible for the generation of the rotation gates and a matrix by an angle.
+\begin{itemize}
+\item $\mathbf{n}$ is a unit vector that defines the axis of rotation in 3D space, expressed as $\mathbf{n} = (n_x, n_y, n_z)$, such as, x-axis $(1,0,0)$, y-axis $(0,1,0)$, z-axis $(0,0,1)$.
+\item $\alpha$ is rotation angle, unit is radians, such as $-\pi/2$ for $R_x(-\pi/2)$.
+\end{itemize}
+
+\textbf{1.2. Pauli vector}
+\[
+\boldsymbol{\sigma} = \hat{i}X + \hat{j}Y + \hat{k}Z \Rightarrow \mathbf{n} \cdot \boldsymbol{\sigma} = n_x \sigma_x + n_y \sigma_y + n_z \sigma_z
+\]
+
+\textbf{1.3. Use the standard closed form (Euler/Pauli identity)}
+
+A key identity for Pauli matrices is: 
+\[
+R_n(\alpha)=\exp\left(-i\,\mathbf{n}\cdot\boldsymbol{\sigma}\,\frac{\alpha}{2}\right)
+=\cos\left(\frac{\alpha}{2}\right)-i\,\mathbf{n}\cdot\boldsymbol{\sigma}\sin\left(\frac{\alpha}{2}\right)
+\]
+This is exactly the “standard Quantum Mechanics” expansion quoted.
+
+\textbf{2. Specialize to rotation about the x-axis}
+
+Rotation about the x-axis means the axis unit vector is
+\[
+\mathbf{n} = \hat{i} = (1,0,0)
+\]
+
+Then,
+\[
+\mathbf{n} \cdot \boldsymbol{\sigma} = \hat{i} \cdot (\hat{i}X + \hat{j}Y + \hat{k}Z) = (1,0,0) \cdot (\hat{i}X + \hat{j}Y + \hat{k}Z) = 1 \cdot X + 0 \cdot Y + 0 \cdot Z = X
+\]
+
+\textbf{3. Plug in $\alpha = -\pi/2$}
+\[
+R_x(-\pi/2) = \cos(\pi/4)I - i \sin(-\pi/4)X = \frac{1}{\sqrt{2}}I - i\left(-\frac{1}{\sqrt{2}} \right)X = \frac{1}{\sqrt{2}}(I + iX)
+\]
+
+Here is,
+\[
+I = \begin{bmatrix}1&0\\0&1\end{bmatrix}, \quad X = \begin{bmatrix}0&1\\1&0\end{bmatrix}
+\]
+
+\[
+\Rightarrow I + iX = \begin{bmatrix}1&0\\0&1\end{bmatrix} + i\begin{bmatrix}0&1\\1&0\end{bmatrix} = \begin{bmatrix}1& i\\ i& 1\end{bmatrix}
+\]
+
+Therefore,
+\[
+R_x(-\pi/2) = \frac{1}{\sqrt{2}} \begin{bmatrix}1& i\\ i& 1\end{bmatrix}
+\]
+
+\end{solution}
+
+\section*{Problem 5 (10 points)}
+Show that the four Bell states $\ket{\beta_{cd}}$ form an orthonormal basis for a 4-dimensional vector space. That is, show:
+\[
+\langle \beta_{cd}|\beta_{c'd'} \rangle = \delta_{cc'}\delta_{dd'}
+\]
+where
+\[
+\delta_{ij}=
+\begin{cases}
+1 & i=j\\
+0 & i\neq j
+\end{cases}
+\]
+
+Hints: (1) calculate the inner products for $cd=00,01,10,11$; and do ten separate calculations: for 00, inner product with 00, 01, 10, 11; for 01, inner product with 01, 10, 11; for 10, with 10, 11; and for 11, with 11. (Check these examples out, as well as the main HW problem, for your own learning.)
+
+Examples of orthonormal basis:
+\[
+\{\ket{0},\ket{1}\}\quad\text{for 2D because }\langle0|0\rangle=1=\langle1|1\rangle\text{ and }\langle0|1\rangle=0.
+\]
+\[
+\{\ket{+},\ket{-}\}\quad\text{for 2D because }\langle+|+\rangle=1=\langle-|-\rangle\text{ and }\langle+|-\rangle=0.
+\]
+\[
+\{\ket{00},\ket{01},\ket{10},\ket{11}\}\quad\text{for 4D because }\langle00|00\rangle=\langle01|01\rangle=\langle10|10\rangle=\langle11|11\rangle=1,
+\]
+and it's not hard to verify all other inner-product relations are summarized as $\langle ij|km\rangle = \delta_{ik}\delta_{jm}$. Check these three examples out, as well as the main HW problem, for your own learning.
+
+\begin{solution}
+
+\textbf{1.Define the Bell states (standard convention)}
+
+
+\textbf{Conditions}
+\[
+\ket{00} = \begin{bmatrix}1\\0\\0\\0\end{bmatrix},\quad
+\ket{01} = \begin{bmatrix}0\\1\\0\\0\end{bmatrix},\quad
+\ket{10} = \begin{bmatrix}0\\0\\1\\0\end{bmatrix},\quad
+\ket{11} = \begin{bmatrix}0\\0\\0\\1\end{bmatrix}
+\]
+
+We use the standard four Bell states (\textbf{maximally entangled states of 2 qubits}) labeled by $cd \in \{00,01,10,11\}$,
+\[
+\ket{\beta_{00}} = \ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}) = \frac{1}{\sqrt{2}} \left (\begin{bmatrix}1\\0\\0\\0\end{bmatrix} + \begin{bmatrix}0\\0\\0\\1\end{bmatrix} \right) = \frac{1}{\sqrt{2}} \begin{bmatrix}1\\0\\0\\1\end{bmatrix}
+\]
+\[\ket{\beta_{01}} = \ket{\Phi^-} = \frac{1}{\sqrt{2}}(\ket{00} - \ket{11}) = \frac{1}{\sqrt{2}} \left (\begin{bmatrix}1\\0\\0\\0\end{bmatrix} - \begin{bmatrix}0\\0\\0\\1\end{bmatrix} \right) = \frac{1}{\sqrt{2}} \begin{bmatrix}1\\0\\0\\-1\end{bmatrix}
+\]
+\[\ket{\beta_{10}} = \ket{\Psi^+} = \frac{1}{\sqrt{2}}(\ket{01} + \ket{10}) = \frac{1}{\sqrt{2}} \left (\begin{bmatrix}0\\1\\0\\0\end{bmatrix} + \begin{bmatrix}0\\0\\1\\0\end{bmatrix} \right) = \frac{1}{\sqrt{2}} \begin{bmatrix}0\\1\\1\\0\end{bmatrix}
+\]
+\[\ket{\beta_{11}} = \ket{\Psi^-} = \frac{1}{\sqrt{2}}(\ket{01} - \ket{10}) = \frac{1}{\sqrt{2}} \left (\begin{bmatrix}0\\1\\0\\0\end{bmatrix} - \begin{bmatrix}0\\0\\1\\0\end{bmatrix} \right) = \frac{1}{\sqrt{2}} \begin{bmatrix}0\\1\\-1\\0\end{bmatrix}
+\]
+
+\begin{table}[h]
+\centering
+\captionsetup{justification=raggedright,singlelinecheck=false,labelsep=period,labelfont=bf}
+\caption{Bell states summary}
+\begin{tabular}{cccccc}
+\toprule
+Label ($cd$) & Name & State formula & Measurement relation & Relative phase & Key intuition \\
+\midrule
+00 & $\ket{\Phi^+}$ & $\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$ & same (00 or 11) & $+$ & correlated, in-phase \\
+01 & $\ket{\Phi^-}$ & $\frac{1}{\sqrt{2}}(\ket{00}-\ket{11})$ & same (00 or 11) & $-$ & correlated, out-of-phase \\
+10 & $\ket{\Psi^+}$ & $\frac{1}{\sqrt{2}}(\ket{01}+\ket{10})$ & opposite (01 or 10) & $+$ & anti-correlated, in-phase \\
+11 & $\ket{\Psi^-}$ & $\frac{1}{\sqrt{2}}(\ket{01}-\ket{10})$ & opposite (01 or 10) & $-$ & anti-correlated, out-of-phase \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{2. Hint 2 is allowed to use inner product}
+
+\textbf{2.1. Orthnormality}
+\[
+\braket{ij}{cd} = \delta_{ic} \delta_{jd}
+\]
+
+\textbf{2.2. Do the 10 separate inner products (exactly as Hint-1 requests)}
+
+(1) Group A: for 00, with 00, 01, 10, 11
+
+\[\begin{aligned}
+\braket{\beta_{00}} &= \left(\frac{1}{\sqrt{2}}(\bra{00} + \bra{11})\right) \left(\frac{1}{\sqrt{2}}(\ket{00} + \ket{11})\right) \\
+&= \frac{1}{2} \begin{bmatrix}1&0&0&1\end{bmatrix} \begin{bmatrix}1\\0\\0\\1\end{bmatrix} \\
+&= \frac{1}{2} (1 \cdot 1 + 0 \cdot 0 + 0 \cdot 0 + 1 \cdot 1) \\
+&= 1
+\end{aligned}\]
+
+\[\begin{aligned}
+\braket{\beta_{00}}{\beta_{01}} &= \left(\frac{1}{\sqrt{2}}(\bra{00} + \bra{11})\right) \left(\frac{1}{\sqrt{2}}(\ket{00} - \ket{11})\right) \\
+&= \frac{1}{2} \begin{bmatrix}1&0&0&1\end{bmatrix} \begin{bmatrix}1\\0\\0\\-1\end{bmatrix} \\
+&= \frac{1}{2} (1 \cdot 1 + 0 \cdot 0 + 0 \cdot 0 + 1 \cdot (-1)) \\
+&= 0
+\end{aligned}\]
+
+\[\begin{aligned}
+\braket{\beta_{00}}{\beta_{10}} &= \left(\frac{1}{\sqrt{2}}(\bra{00} + \bra{11})\right) \left(\frac{1}{\sqrt{2}}(\ket{01} + \ket{10})\right) \\
+&= \frac{1}{2} \begin{bmatrix}1&0&0&1\end{bmatrix} \begin{bmatrix}0\\1\\1\\0\end{bmatrix} \\
+&= \frac{1}{2} (1 \cdot 0 + 0 \cdot 1 + 0 \cdot 1 + 1 \cdot 0) \\
+&= 0
+\end{aligned}\]
+
+\[\begin{aligned}
+\braket{\beta_{00}}{\beta_{11}} &= \left(\frac{1}{\sqrt{2}}(\bra{00} + \bra{11})\right) \left(\frac{1}{\sqrt{2}}(\ket{01} - \ket{10})\right) \\
+&= \frac{1}{2} \begin{bmatrix}1&0&0&1\end{bmatrix} \begin{bmatrix}0\\1\\-1\\0\end{bmatrix} \\
+&= \frac{1}{2} (1 \cdot 0 + 0 \cdot 1 + 0 \cdot (-1) + 1 \cdot 0) \\
+&= 0
+\end{aligned}\]
+
+(2) Group B: for 01, with 01, 10, 11
+
+\[\begin{aligned}
+\braket{\beta_{01}}{\beta_{01}} &= \left(\frac{1}{\sqrt{2}}(\bra{00} - \bra{11})\right) \left(\frac{1}{\sqrt{2}}(\ket{00} - \ket{11})\right) \\
+&= \frac{1}{2} \begin{bmatrix}1&0&0&-1\end{bmatrix} \begin{bmatrix}1\\0\\0\\-1\end{bmatrix} \\
+&= \frac{1}{2} (1 \cdot 1 + 0 \cdot 0 + 0 \cdot 0 + (-1) \cdot (-1)) \\
+&= 1
+\end{aligned}\]
+
+\[\begin{aligned}
+\braket{\beta_{01}}{\beta_{10}} &= \left(\frac{1}{\sqrt{2}}(\bra{00} - \bra{11})\right) \left(\frac{1}{\sqrt{2}}(\ket{01} + \ket{10})\right) \\
+&= \frac{1}{2} \begin{bmatrix}1&0&0&-1\end{bmatrix} \begin{bmatrix}0\\1\\1\\0\end{bmatrix} \\
+&= \frac{1}{2} (1 \cdot 0 + 0 \cdot 1 + 0 \cdot 1 + (-1) \cdot 0) \\
+&= 0
+\end{aligned}\]
+
+\[\begin{aligned}
+\braket{\beta_{01}}{\beta_{11}} &= \left(\frac{1}{\sqrt{2}}(\bra{00} - \bra{11})\right) \left(\frac{1}{\sqrt{2}}(\ket{01} - \ket{10})\right) \\
+&= \frac{1}{2} \begin{bmatrix}1&0&0&-1\end{bmatrix} \begin{bmatrix}0\\1\\-1\\0\end{bmatrix} \\
+&= \frac{1}{2} (1 \cdot 0 + 0 \cdot 1 + 0 \cdot (-1) + (-1) \cdot 0) \\
+&= 0
+\end{aligned}\]
+
+(3) Group C: for 10, with 10, 11
+
+\[\begin{aligned}
+\braket{\beta_{10}}{\beta_{10}} &= \left(\frac{1}{\sqrt{2}}(\bra{01} + \bra{10})\right) \left(\frac{1}{\sqrt{2}}(\ket{01} + \ket{10})\right) \\
+&= \frac{1}{2} \begin{bmatrix}0&1&1&0\end{bmatrix} \begin{bmatrix}0\\1\\1\\0\end{bmatrix} \\
+&= \frac{1}{2} (0 \cdot 0 + 1 \cdot 1 + 1 \cdot 1 + 0 \cdot 0) \\
+&= 1
+\end{aligned}\]
+
+\[\begin{aligned}
+\braket{\beta_{10}}{\beta_{11}} &= \left(\frac{1}{\sqrt{2}}(\bra{01} + \bra{10})\right) \left(\frac{1}{\sqrt{2}}(\ket{01} - \ket{10})\right) \\
+&= \frac{1}{2} \begin{bmatrix}0&1&1&0\end{bmatrix} \begin{bmatrix}0\\1\\-1\\0\end{bmatrix} \\
+&= \frac{1}{2} (0 \cdot 0 + 1 \cdot 1 + 1 \cdot (-1) + 0 \cdot 0) \\
+&= 0
+\end{aligned}\]
+
+(4) Group D: for 11, with 11
+
+\[\begin{aligned}
+\braket{\beta_{11}}{\beta_{11}} &= \left(\frac{1}{\sqrt{2}}(\bra{01} - \bra{10})\right) \left(\frac{1}{\sqrt{2}}(\ket{01} - \ket{10})\right) \\
+&= \frac{1}{2} \begin{bmatrix}0&1&-1&0\end{bmatrix} \begin{bmatrix}0\\1\\-1\\0\end{bmatrix} \\
+&= \frac{1}{2} (0 \cdot 0 + 1 \cdot 1 + (-1) \cdot (-1) + 0 \cdot 0) \\
+&= 1
+\end{aligned}\]
+
+\textbf{3. Results summary}
+
+(1) Same Bell states:
+\[\braket{\beta_{00}}{\beta_{00}} = 1, \quad \braket{\beta_{01}}{\beta_{01}} = 1, \quad \braket{\beta_{10}}{\beta_{10}} = 1, \quad \braket{\beta_{11}}{\beta_{11}} = 1\]
+
+(2) Different Bell states:
+\[\braket{\beta_{00}}{\beta_{01}} = 0, \quad \braket{\beta_{00}}{\beta_{10}} = 0, \quad \braket{\beta_{00}}{\beta_{11}} = 0, \quad \braket{\beta_{01}}{\beta_{10}} = 0, \quad \braket{\beta_{01}}{\beta_{11}} = 0, \quad \braket{\beta_{10}}{\beta_{11}} = 0\]
+
+(3) Same labels imply same states, different labels imply different states.
+
+\textbf{4. Conclusion}
+
+From the results summary,
+\begin{itemize}
+    \item $\braket{\beta_{cd}}{\beta_{cd}} = 1$ for all $cd \in \{00, 01, 10, 11\}$ (normlized)
+    \item $\braket{\beta_{cd}}{\beta_{c'd'}} = 0$ for all $cd \neq c'd'$ (orthogonal)
+\end{itemize}
+
+Therefore,
+\[\boxed{\braket{\beta_{cd}}{\beta_{c'd'}} = \delta_{cc'}\delta_{dd'}}\]
+
+\end{solution}
+
+\section*{Problem 6 (10 points)}
+For the CNOT operator, show it is self-inverse (\textit{i.e.}, $\text{CNOT}^2 = I$). From this self-inverse property, you can see that
+\[
+\text{CNOT}\ket{A}\ket{B}=\ket{A}\ket{A\oplus B}
+\]
+implies
+\[
+\text{CNOT}\ket{A}\ket{A\oplus B}=\ket{A}\ket{B}.
+\]
+
+\begin{solution}
+
+\textbf{1. Definition of CNOT}
+\[\text{CNOT}\ket{A}\ket{B} = \ket{A}\ket{A \oplus B} \text{ with } A,B \in \{0, 1\}\]
+where $\oplus$ is the XOR operation.
+
+\textbf{2. Show $\text{CNOT}^2 = I$}
+
+Now we know,
+\[
+\text{CNOT}\ket{A}\ket{B} = \ket{A}\ket{A \oplus B}
+\]
+
+Applying CNOT again,
+\[\text{CNOT}^2 \ket{A}\ket{B} = \text{CNOT} (\ket{A}\ket{A \oplus B}) = \ket{A}\ket{A \oplus (A \oplus B)}
+\]
+
+Now using the XOR identity,
+\[\begin{aligned}
+A \oplus A &= 0, \quad 0 \oplus B = B \\
+\Rightarrow A \oplus (A \oplus B) &= (A \oplus A) \oplus B = 0 \oplus B = B
+\end{aligned}\]
+
+\[
+\Rightarrow \ket{A}\ket{A \oplus (A \oplus B)} = \ket{A}\ket{B}
+\]
+
+Therefore,
+\[\begin{aligned}
+\text{CNOT}^2 \ket{A}\ket{B} &= \ket{A}\ket{B} \\
+\Rightarrow \boxed{\text{CNOT}^2 = I}
+\end{aligned}\]
+
+\textbf{3. Deduce the “undo” statement}
+
+Given
+\[
+\text{CNOT}\ket{A}\ket{B} = \ket{A}\ket{A \oplus B}
+\]
+
+Applying CNOT to both sides,
+\[
+\text{CNOT}(\text{CNOT}\ket{A}\ket{B}) = \text{CNOT}(\ket{A}\ket{A \oplus B})
+\]
+
+Left-hand side,
+\[
+\text{CNOT}^2 \ket{A}\ket{B} = \ket{A}\ket{B}
+\]
+
+Right-hand side,
+\[
+\text{CNOT}\ket{A}\ket{A \oplus B} = \ket{A}\ket{A \oplus (A \oplus B)} = \ket{A}\ket{B}
+\]
+
+Result summary,
+\[
+\boxed{\text{CNOT}\ket{A}\ket{A \oplus B} = \ket{A}\ket{B}}
+\]
+
+\end{solution}
+
+\section*{Problem 7 (10 points)}
+It is common to entangle separable states by applying $H$ followed by CNOT, and disentangle by applying CNOT followed by $H$.
+
+Show that
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{problem7.png}
+\end{figure}
+
+\begin{solution}
+
+This solution will use the above conditions and results from previous problems, such as the Hadamard gate transformations and the CNOT operation.
+
+\textbf{1. Start from the definition will be helpful}
+
+Hadamard,
+\[
+H\ket{x} = \frac{\ket{0} + (-1)^x \ket{1}}{\sqrt{2}}
+\]
+
+CNOT,
+\[
+\text{CNOT}\ket{A}\ket{B} = \ket{A}\ket{A \oplus B}
+\]
+
+Bell states,
+\[
+\ket{\beta_{00}} = \frac{\ket{00}+\ket{11}}{\sqrt{2}}, \quad \ket{\beta_{01}} = \frac{\ket{00}-\ket{11}}{\sqrt{2}}, \quad \ket{\beta_{10}} = \frac{\ket{01}+\ket{10}}{\sqrt{2}}, \quad \ket{\beta_{11}} = \frac{\ket{01}-\ket{10}}{\sqrt{2}}
+\]
+
+\textbf{2. Entangle: apply $H$ then CNOT to $\ket{x}\ket{y}$}
+
+\textbf{2.1. Apply $H$ to the first qubit}
+\[
+(H \otimes I)\ket{x}\ket{y} = (H\ket{x}) \otimes \ket{y} = \frac{1}{\sqrt{2}}(\ket{0} + (-1)^x\ket{1})\ket{y} = \frac{1}{\sqrt{2}}(\ket{0}\ket{y} + (-1)^x\ket{1}\ket{y})
+\]
+
+\textbf{2.2. Apply CNOT to the resulting state}
+
+Use CNOT definition,
+\begin{itemize}
+    \item $\text{CNOT}\ket{0}\ket{y} = \ket{0}\ket{0 \oplus y} = \ket{0}\ket{y}$
+    \item $\text{CNOT}\ket{1}\ket{y} = \ket{1}\ket{1 \oplus y} = \ket{1}\ket{y \oplus 1}$
+\end{itemize}
+\[
+\text{CNOT} \left( \frac{1}{\sqrt{2}}(\ket{0}\ket{y} + (-1)^x\ket{1}\ket{y}) \right) = \frac{1}{\sqrt{2}}(\ket{0}\ket{y} + (-1)^x\ket{1}\ket{1 \oplus y})
+\]
+That is the entangled state produced from $\ket{x}\ket{y}$.
+
+\textbf{3. Match it to the four Bell states (do the four cases)}
+
+Now check $y = 0$ and $y = 1$,
+
+\textbf{case 1:} $y = 0$, then $y \oplus 1 = 1$, so
+\[
+\frac{1}{\sqrt{2}}(\ket{0}\ket{0} + (-1)^x\ket{1}\ket{1}) = \frac{1}{\sqrt{2}}(\ket{00} + (-1)^x\ket{11})
+\]
+\begin{itemize}
+    \item If $x = 0$: $\frac{\ket{00} + \ket{11}}{\sqrt{2}} = \ket{\beta_{00}}$
+    \item If $x = 1$: $\frac{\ket{00} - \ket{11}}{\sqrt{2}} = \ket{\beta_{01}}$
+\end{itemize}
+So for $y = 0$: output is $\ket{\beta_{00}}$ when $x = 0$, and $\ket{\beta_{01}}$ when $x = 1$.
+
+\textbf{case 2:} $y = 1$, then $y \oplus 1 = 0$, so
+\[
+\frac{1}{\sqrt{2}}(\ket{0}\ket{1} + (-1)^x\ket{1}\ket{0}) = \frac{1}{\sqrt{2}}(\ket{01} + (-1)^x\ket{10})
+\]
+\begin{itemize}
+    \item If $x = 0$: $\frac{\ket{01} + \ket{10}}{\sqrt{2}} = \ket{\beta_{10}}$
+    \item If $x = 1$: $\frac{\ket{01} - \ket{10}}{\sqrt{2}} = \ket{\beta_{11}}$
+\end{itemize}
+
+Therefore, for all four $(x, y)$, the result is exactly the Bell state $\ket{\beta_{xy}}$:
+\[
+\textbf{CNOT}(H \otimes I)\ket{x}\ket{y} = \ket{\beta_{xy}}
+\]
+
+\textbf{4. Disentangle: apply CNOT then $H$ to the Bell state}
+
+Now start from the Bell state we just got,
+\[
+\ket{\beta_{xy}} = \frac{1}{\sqrt{2}}(\ket{0}\ket{y} + (-1)^x \ket{1}\ket{1 \oplus y})
+\]
+
+\textbf{4.1. Apply CNOT}
+\[
+\ket{\beta_{xy}} = \frac{1}{\sqrt{2}}(\text{CNOT}\ket{0}\ket{y} + (-1)^x \text{CNOT}\ket{1}\ket{1 \oplus y})
+\]
+
+Compute each term,
+\begin{itemize}
+    \item $\text{CNOT}\ket{0}\ket{y} = \ket{0}\ket{y}$
+    \item $\text{CNOT}\ket{1}\ket{1 \oplus y} = \ket{1}\ket{(1 \oplus y) \oplus 1} = \ket{1}\ket{y}$
+\end{itemize}
+Therefore,
+\[
+\text{CNOT}\ket{\beta_{xy}} = \frac{1}{\sqrt{2}}(\ket{0}\ket{y} + (-1)^x\ket{1}\ket{y}) = \left(\frac{\ket{0} + (-1)^x\ket{1}}{\sqrt{2}}\right)\ket{y}
+\]
+
+But $\frac{\ket{0} + (-1)^x\ket{1}}{\sqrt{2}} = H\ket{x}$. Hence,
+\[
+\text{CNOT}\ket{\beta_{xy}} = (H\ket{x})\ket{y}
+\]
+
+\textbf{4.2. Apply $H$ to the first qubit}
+\[
+(H \otimes I) \text{CNOT}\ket{\beta_{xy}} = (H(H\ket{x}))\ket{y} = (H^2\ket{x})\ket{y} = \ket{x}\ket{y}
+\]
+because $H^2 = I$, so,
+\[\boxed{(H \otimes I) \text{CNOT}\ket{\beta_{xy}} = \ket{x}\ket{y}}
+\]
+That is precisely “disentangle by CNOT followed by $H$.”
+
+\end{solution}
+
+\end{document}
+

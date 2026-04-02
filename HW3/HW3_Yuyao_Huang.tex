@@ -1,0 +1,314 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, physics}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newenvironment{solution}
+{\par\noindent\textbf{Solution:}\par}
+{\vspace{1em}}
+
+\title{Homework Assignment No.3 \\ EE520/EE459 \\ Yuyao Huang}
+\date{Due 11:59 PM, March 12, 2026}
+\begin{document}
+\maketitle
+
+\textbf{Total: 100 points} \\
+\textbf{Submit: a single PDF file of all your work}
+
+\section*{Problem 1 (15 points)}
+Inspect and convince yourself of the equality of the matrix and dyad representations below.
+\[\begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & a & b \\ 0 & 0 & c & d \end{bmatrix} = \ket{00}\bra{00} + \ket{01}\bra{01} + a\ket{10}\bra{10} + b\ket{10}\bra{11} + c\ket{11}\bra{10} + d\ket{11}\bra{11}\]
+\underline{Question:} Write down the dyad form for the matrix below:
+\[\begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & a & b & 0 \\ 0 & c & d & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} =\]
+
+\begin{solution}
+Since $\ket{x}\bra{y}$ represents a operator, and its function is:\[\ket{x}\bra{y}\ket{\psi} = \ket{x}\left(\bra{y}\ket{\psi}\right)\]
+
+So,
+\begin{itemize}[itemsep=0em]
+    \item Row index decides the ket part, and column index decides the bra part.
+    \item In the dyad form, the ket part is the row index, and the bra part is the column index.
+\end{itemize}
+
+Therefore, the $(i,j)$th element of the matrix corresponds exactly to: \[\ket{i \text{th basis}}\bra{j \text{th basis}}\]
+
+And \begin{align*}
+    1 &\leftrightarrow \ket{00} \\ 
+    2 &\leftrightarrow \ket{01} \\ 
+    3 &\leftrightarrow \ket{10} \\ 
+    4 &\leftrightarrow \ket{11}
+\end{align*}
+
+Thus \[\begin{bmatrix}(1,1) & (1,2) & (1,3) & (1,4) \\ (2,1) & (2,2) & (2,3) & (2,4) \\ (3,1) & (3,2) & (3,3) & (3,4) \\ (4,1) & (4,2) & (4,3) & (4,4)\end{bmatrix}\]
+
+which corresponds to \[\begin{bmatrix}\ket{00}\bra{00} & \ket{00}\bra{01} & \ket{00}\bra{10} & \ket{00}\bra{11} \\ \ket{01}\bra{00} & \ket{01}\bra{01} & \ket{01}\bra{10} & \ket{01}\bra{11} \\ \ket{10}\bra{00} & \ket{10}\bra{01} & \ket{10}\bra{10} & \ket{10}\bra{11} \\ \ket{11}\bra{00} & \ket{11}\bra{01} & \ket{11}\bra{10} & \ket{11}\bra{11}\end{bmatrix}\]
+
+So now,
+\[\begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & a & b & 0 \\ 0 & c & d & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} = \ket{00}\bra{00} + a\ket{01}\bra{01} + b\ket{01}\bra{10} + c\ket{10}\bra{01} + d\ket{10}\bra{10} + \ket{11}\bra{11}\]
+
+\end{solution}
+
+\section*{Problem 2 (15 points)}
+Recall the $+1$ eigenstate $\ket{\Psi_n}$ of $\operatorname{\sigma_n} = \mathbf{n} \cdot \operatorname{\sigma}$ where $\operatorname{\sigma_n}\ket{\Psi_n} = + \ket{\Psi_n}$, where $\mathbf{n}$ is the unit vector with angle coordinates of ($\theta$, $\phi$), which is given by
+\[\ket{\psi_n} = \ket{\psi(\theta, \phi)} = \cos{\frac{\theta}{2}}\ket{0} + e^{i\phi}\sin{\frac{\theta}{2}}\ket{1} = \begin{bmatrix}\cos{\frac{\theta}{2}} \\ e^{i\phi}\sin{\frac{\theta}{2}}\end{bmatrix}\]
+
+\underline{Question:} By writing the below two expressions as matrices, show the equality. Here, $P+$ is the projector to the $+1$ eigenstate: \[P+ = \ket{\psi_n}\bra{\psi_n} = \frac{1}{2}\left(\operatorname{I} + \mathbf{n} \cdot \operatorname{\sigma}\right)\]
+
+\begin{solution}
+
+\textbf{Step 1: calculate leftside of the equation}
+
+From the question, we have \[\ket{\psi_n} = \begin{bmatrix}\cos{\frac{\theta}{2}} \\ e^{i\phi}\sin{\frac{\theta}{2}}\end{bmatrix}\]
+
+And the formation of Conjugate Transpose (Hermitian), \[\bra{\psi_n} = \left(\ket{\psi_n}\right)^\dagger = \left(\ket{\psi_n}^*\right)^{\mathrm{T}} = \left(\begin{bmatrix}\cos{\frac{\theta}{2}} \\ e^{-i\phi}\sin{\frac{\theta}{2}}\end{bmatrix}\right)^{\mathrm{T}} = \begin{bmatrix}\cos{\frac{\theta}{2}} & e^{-i\phi}\sin{\frac{\theta}{2}}\end{bmatrix}\]
+
+So, 
+\[\begin{aligned}
+\ket{\psi_n}\bra{\psi_n} &= \begin{bmatrix}\cos{\frac{\theta}{2}} \\ e^{i\phi}\sin{\frac{\theta}{2}}\end{bmatrix} \begin{bmatrix}\cos{\frac{\theta}{2}} & e^{-i\phi}\sin{\frac{\theta}{2}}\end{bmatrix} \\
+&= \begin{bmatrix}\left(\cos{\frac{\theta}{2}}\right)^2 & \cos{\frac{\theta}{2}} \cdot e^{-i\phi}\sin{\frac{\theta}{2}} \\ e^{i\phi}\sin{\frac{\theta}{2}} \cdot \cos{\frac{\theta}{2}} & e^{i\phi}\sin{\frac{\theta}{2}} \cdot e^{-i\phi}\sin{\frac{\theta}{2}}\end{bmatrix} \\
+&= \boxed{\begin{bmatrix}\cos^2{\frac{\theta}{2}} & e^{-i\phi}\cos{\frac{\theta}{2}}\sin{\frac{\theta}{2}} \\ e^{i\phi}\cos{\frac{\theta}{2}}\sin{\frac{\theta}{2}} & \sin^2{\frac{\theta}{2}}\end{bmatrix}}
+\end{aligned}\]
+
+\textbf{Step 2: calculate rightside of the equation}
+
+$\mathbf{n}$ is the unit vector with angle coordinates of ($\theta$, $\phi$), so we can write $\mathbf{n}$ as \[\mathbf{n} = \left(\sin{\theta}\cos{\phi}, \sin{\theta}\sin{\phi}, \cos{\theta}\right)\]
+
+Pauli matrices are defined as:\[\sigma_x = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}, \quad \sigma_y = \begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}, \quad \sigma_z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}\]
+
+Then,
+\[\begin{aligned}
+\mathbf{n} \cdot \operatorname{\sigma} &= n_x\sigma_x + n_y\sigma_y + n_z\sigma_z \\
+&= \left(\sin{\theta}\cos{\phi}\right)\sigma_x + \left(\sin{\theta}\sin{\phi}\right)\sigma_y + \left(\cos{\theta}\right)\sigma_z \\
+&= \left(\sin{\theta}\cos{\phi}\right)\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} + \left(\sin{\theta}\sin{\phi}\right)\begin{bmatrix}0 & -i \\ i & 0\end{bmatrix} + \left(\cos{\theta}\right)\begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} \\
+&= \begin{bmatrix}0 & \sin{\theta}\cos{\phi} \\ \sin{\theta}\cos{\phi} & 0\end{bmatrix} + \begin{bmatrix}0 & -i\sin{\theta}\sin{\phi} \\ i\sin{\theta}\sin{\phi} & 0\end{bmatrix} + \begin{bmatrix}\cos{\theta} & 0 \\ 0 & -\cos{\theta}\end{bmatrix} \\
+&= \begin{bmatrix}\cos{\theta} & \sin{\theta}\left(\cos{\phi} - i\sin{\phi}\right) \\ \sin{\theta}\left(\cos{\phi} + i\sin{\phi}\right) & -\cos{\theta}\end{bmatrix} \\
+&= \begin{bmatrix}\cos{\theta} & \sin{\theta}e^{-i\phi} \\ \sin{\theta}e^{i\phi} & -\cos{\theta}\end{bmatrix}
+\end{aligned}\]
+
+$I$ is the identity matrix, so \[\operatorname{I} = \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}\]
+
+Thus, 
+\[\begin{aligned}
+\frac{1}{2}\left(\operatorname{I} + \mathbf{n} \cdot \operatorname{\sigma}\right) &= \frac{1}{2} \left( \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix} + \begin{bmatrix}\cos{\theta} & \sin{\theta}e^{-i\phi} \\ \sin{\theta}e^{i\phi} & -\cos{\theta}\end{bmatrix} \right) \\
+&= \frac{1}{2} \begin{bmatrix}1 + \cos{\theta} & \sin{\theta}e^{-i\phi} \\ \sin{\theta}e^{i\phi} & 1 - \cos{\theta}\end{bmatrix} \\
+&= \begin{bmatrix}\frac{1 + \cos{\theta}}{2} & \frac{\sin{\theta}e^{-i\phi}}{2} \\ \frac{\sin{\theta}e^{i\phi}}{2} & \frac{1 - \cos{\theta}}{2}\end{bmatrix}
+\end{aligned}\]
+
+Now we have \[\cos^2{\frac{\theta}{2}} = \frac{1+\cos{\theta}}{2}, \quad \sin^2{\frac{\theta}{2}} = \frac{1-\cos{\theta}}{2}, \quad \sin{\theta} = 2\sin{\frac{\theta}{2}}\cos{\frac{\theta}{2}}\]
+
+So 
+\[\frac{\sin{\theta}}{2} = \sin{\frac{\theta}{2}}\cos{\frac{\theta}{2}}\]
+
+\[\boxed{\Rightarrow \frac{1}{2}\left(\operatorname{I} + \mathbf{n} \cdot \operatorname{\sigma}\right) = \begin{bmatrix}\cos^2{\frac{\theta}{2}} & e^{-i\phi}\cos{\frac{\theta}{2}}\sin{\frac{\theta}{2}} \\ e^{i\phi}\cos{\frac{\theta}{2}}\sin{\frac{\theta}{2}} & \sin^2{\frac{\theta}{2}}\end{bmatrix}}\]
+
+\textbf{Step 3: compare the leftside and rightside of the equation}
+
+\[\boxed{\text{We can see that the leftside and rightside of the equation are equal, so the equation is verified.}}\]
+
+\end{solution}
+
+\section*{Problem 3 (25 points)}
+Generalization of Bloch sphere picture (Sec. 1.2) to the \textbf{\textit{mixed}} state for single qubits.
+\begin{enumerate}
+    \item \underline{Question:} Show that for a \textbf{pure} state, the density matrix is $\rho = \frac{1}{2}(I + \mathbf{n} \cdot \boldsymbol{\sigma})$ where $\mathbf{n}$ is a unit vector. [Sec.1.2 says that $\mathbf{r}$ for $\rho = \ket{\psi(\theta,\phi)}\bra{\psi(\theta,\phi)}$ is a unit vector with angular coordinates $(\theta, \phi)$ on the Bloch sphere.] \textit{Hint}: A pure state may be considered an ensemble $\{p=1, \ket{\psi_n}\}$ of a single state $\ket{\psi_n}$ and probability $p=1$.
+    \item \underline{Question:} Show that the \textbf{\textit{density matrix}} for a mixed state given by an ensemble of pure states $\{p_j, \ket{\psi_j}\}$ where $\sum_j p_j = 1$ may be written as $\rho = \dfrac{I + \mathbf{r} \cdot \boldsymbol{\sigma}}{2}$ where $\mathbf{r}$ is a 3-dimensional vector such that $\|\mathbf{r}\| \leq 1$. This $\mathbf{r}$ is known as the \textbf{\textit{Bloch vector}} for $\rho$. \textit{Hint}: $\rho = \sum_j p_j \ket{\psi_j}\bra{\psi_j} = \sum_j p_j \frac{1}{2}(I + \mathbf{n}_j \cdot \boldsymbol{\sigma}) = \frac{1}{2}\left[I\sum_j p_j + \sum_j p_j \mathbf{n}_j \cdot \boldsymbol{\sigma}\right]$ $\Rightarrow$ find the expression for the Bloch vector $\mathbf{r}$ and argue why the size of $\mathbf{r}$ will be less than or equal to 1. The equality is when all pure state Bloch vectors $\mathbf{n}_j$ are aligned on a straight line in the same direction to the same point $\mathbf{n}$ on the Bloch sphere. In this case, $\sum_j p_j \mathbf{n}_j = \mathbf{n}$ for simply one pure state.
+    \item \underline{Question:} What is the \textbf{\textit{Bloch vector}} $\mathbf{r}$ for $\rho = I/2$?
+    \item \underline{Question:} Show that the state is \textbf{pure} if and only if $\|\mathbf{r}\| = 1$. [\textit{Hint}: Apply $\text{Tr}(\rho^2) = 1$, $(\mathbf{r} \cdot \boldsymbol{\sigma})^2 = r^2 I$, anti-commuting $\boldsymbol{\sigma}$ and $\boldsymbol{\sigma}^2 = I$ to show $r^2 = 1$.]
+\end{enumerate}
+
+\begin{solution}
+
+\textbf{Solution 1}
+
+For a pure state, the density matrix is defined as\[\rho = \ket{\psi_n}\bra{\psi_n}.\]
+    
+A pure state may be viewed as an ensemble consisting of a single state \(\{p=1, \ket{\psi_n}\}\).
+    
+Hence, \[\rho = 1\cdot \ket{\psi_n}\bra{\psi_n}\]
+    
+From Problem 2, we have already shown that \[\ket{\psi_n}\bra{\psi_n}=\frac12 \left(I+\mathbf n\cdot\boldsymbol{\sigma}\right)\]
+
+where \(\mathbf n=(\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta)\) is a unit vector corresponding to the point \((\theta,\phi)\) on the Bloch sphere.
+
+Therefore, the density matrix for a pure qubit state can be written as \[\rho=\frac12\left(I+\mathbf n\cdot\boldsymbol{\sigma}\right)\]
+where \(\boxed{\|\mathbf n\|=1}\).
+
+\textbf{Solution 2}
+
+For a mixed state described by an ensemble of pure states $\{p_j, \ket{\psi_j}\}$ with $\sum_j p_j=1$, the density matrix is \[\rho=\sum_j p_j \ket{\psi_j}\bra{\psi_j}.\]
+
+From part (1), each pure-state density matrix can be written as \[\ket{\psi_j}\bra{\psi_j} = \frac12\left(I+\mathbf n_j\cdot\boldsymbol{\sigma}\right),\]
+
+where $\mathbf n_j$ is a unit Bloch vector, so $\|\mathbf n_j\|=1$. Substituting into $\rho$, we obtain \[\rho = \sum_j p_j \frac12\left(I+\mathbf n_j\cdot\boldsymbol{\sigma}\right) = \frac12\left[I\sum_j p_j+\sum_j p_j\,\mathbf n_j\cdot\boldsymbol{\sigma}\right].\]
+
+Since $\sum_j p_j=1$, this becomes \[\rho = \frac12\left[I+\sum_j p_j\,\mathbf n_j\cdot\boldsymbol{\sigma}\right].\]
+
+Define the Bloch vector $\mathbf r=\sum_j p_j \mathbf n_j$, then \[\boxed{\rho=\frac12\left(I+\mathbf r\cdot\boldsymbol{\sigma}\right)}.\]
+
+Now we show $\|\mathbf r\|\le 1$. By the triangle inequality, \[\|\mathbf r\| = \left\|\sum_j p_j \mathbf n_j\right\| \le \sum_j p_j \|\mathbf n_j\| = \sum_j p_j = 1.\]
+
+Therefore $\boxed{\|\mathbf r\|\le 1}$, and the Bloch vector of any single-qubit mixed state satisfies $\|\mathbf r\|\le 1$.
+
+\textbf{Solution 3}
+
+From part (2), we have \[\rho=\dfrac12\left(\operatorname{I}+\mathbf{r}\cdot\boldsymbol{\sigma}\right)\]
+
+Comparing with \(\rho=\frac{\operatorname{I}}{2}\), we have \[\frac{\operatorname{I}}{2} = \dfrac12\left(\operatorname{I}+\mathbf{r}\cdot\boldsymbol{\sigma}\right) = \frac{\operatorname{I}}{2} + \frac12\left(\mathbf{r}_x\sigma_x+\mathbf{r}_y\sigma_y+\mathbf{r}_z\sigma_z\right)\]
+
+gives \[r_x\sigma_x+r_y\sigma_y+r_z\sigma_z=0\]
+
+Multiplying by \(\sigma_k\) and taking the trace, and using the orthogonality \[\operatorname{Tr}(\sigma_i\sigma_j)=2\delta_{ij}\]
+
+yields \(2r_k=0\) for each \(k=x,y,z\).
+
+Therefore, \[\boxed{\mathbf{r}=(0,0,0)}\]
+
+i.e., \(\rho=I/2\) corresponds to the center of the Bloch sphere.
+
+\textbf{Solution 4}
+
+For a single qubit, \[\rho=\frac12\left(I+\mathbf r\cdot\boldsymbol{\sigma}\right).\]
+
+We compute \[\rho^2 = \frac14\left(I+\mathbf r\cdot\boldsymbol{\sigma}\right)^2 = \frac14\left(I+2\,\mathbf r\cdot\boldsymbol{\sigma}+(\mathbf r\cdot\boldsymbol{\sigma})^2\right)\]
+
+Using the Pauli matrix relations $\sigma_x^2=\sigma_y^2=\sigma_z^2=I$ and $\sigma_i\sigma_j+\sigma_j\sigma_i=0$ for $i\ne j$, we get \[(\mathbf r\cdot\boldsymbol{\sigma})^2 = (r_x^2+r_y^2+r_z^2)I = \|\mathbf r\|^2 I\]
+
+Therefore, \[\rho^2 = \frac14\left[(1+\|\mathbf r\|^2)I+2\,\mathbf r\cdot\boldsymbol{\sigma}\right]\]
+
+Taking the trace, and using $\operatorname{Tr}(I)=2$, $\operatorname{Tr}(\sigma_x)=\operatorname{Tr}(\sigma_y)=\operatorname{Tr}(\sigma_z)=0$, it follows that \[\operatorname{Tr}(\rho^2) = \frac12(1+\|\mathbf r\|^2)\]
+
+A state is pure if and only if $\operatorname{Tr}(\rho^2)=1$. Thus, \[1=\frac12(1+\|\mathbf r\|^2) \quad\Longrightarrow\quad \|\mathbf r\|^2=1 \quad\Longrightarrow\quad \|\mathbf r\|=1\]
+
+So, if $\rho$ is pure, then $\|\mathbf r\|=1$. Conversely, if $\|\mathbf r\|=1$, then $(\mathbf r\cdot\boldsymbol{\sigma})^2=I$, and therefore \[\rho^2 = \frac14\left(I+2\,\mathbf r\cdot\boldsymbol{\sigma}+I\right) = \frac12\left(I+\mathbf r\cdot\boldsymbol{\sigma}\right) = \rho\]
+
+Hence $\rho$ is pure. Therefore, \[\boxed{\rho \text{ is pure if and only if } \|\mathbf r\|=1}\]
+
+\end{solution}
+
+\section*{Problem 4 (20 points)}
+Find the Schmidt decomposition of the states below. [Important: Make sure that your Schmidt basis is orthonormal. If not, then your answer is wrong.]
+\[\frac{1}{\sqrt{2}}(\ket{00} + \ket{11}), \quad \frac{2\ket{00} + \ket{01} + \ket{10} + \ket{11}}{\sqrt{10}}\]
+
+\begin{solution}
+
+\textbf{(1) State 1}
+
+The state $\ket{\psi_1}=\dfrac{1}{\sqrt{2}}(\ket{00}+\ket{11})$ is already in Schmidt form:
+\[
+\ket{\psi_1}=\frac{1}{\sqrt{2}}\ket{0}\ket{0}+\frac{1}{\sqrt{2}}\ket{1}\ket{1}.
+\]
+
+The Schmidt coefficients are $\lambda_1=\lambda_2=\dfrac{1}{\sqrt{2}}$, with Schmidt bases $\ket{u_1}=\ket{v_1}=\ket{0}$ and $\ket{u_2}=\ket{v_2}=\ket{1}$. These are orthonormal since $\langle0|0\rangle=\langle1|1\rangle=1$ and $\langle0|1\rangle=0$. Therefore,
+\[
+\boxed{\ket{\psi_1}=\frac{1}{\sqrt{2}}\ket{0}\ket{0}+\frac{1}{\sqrt{2}}\ket{1}\ket{1}},
+\]
+which is the standard Schmidt decomposition of the Bell state.
+
+\textbf{(2) State 2}
+
+For a bipartite state $\ket{\psi}=\sum_{i,j}A_{ij}\ket{i}\ket{j}$, the Schmidt decomposition is obtained via SVD of the coefficient matrix $A$. From $\ket{\psi_2}=\dfrac{2\ket{00}+\ket{01}+\ket{10}+\ket{11}}{\sqrt{10}}$, we read off
+\[A=\frac{1}{\sqrt{10}}\begin{bmatrix}2&1\\1&1\end{bmatrix}\]
+
+\textbf{Schmidt coefficients.} The squared Schmidt coefficients are eigenvalues of $AA^\dagger$:
+\[AA^\dagger = \frac{1}{\sqrt{10}}\begin{bmatrix}2&1\\1&1\end{bmatrix} \frac{1}{\sqrt{10}}\begin{bmatrix}2&1\\1&1\end{bmatrix}^{\mathrm{T}} = \frac{1}{10}\begin{bmatrix}5&3\\3&2\end{bmatrix}\]
+
+The eigenvalues of $\begin{bmatrix}5&3\\3&2\end{bmatrix}$ satisfy $\det(M-\mu I)=(5-\mu)(2-\mu)-9=\mu^2-7\mu+1=0$, giving $\mu_{1,2}=\dfrac{7\pm3\sqrt5}{2}$. 
+Hence
+\[\lambda_{1,2}^2=\frac{7\pm3\sqrt5}{20}, \qquad \boxed{\lambda_1=\sqrt{\frac{7+3\sqrt5}{20}},\quad\lambda_2=\sqrt{\frac{7-3\sqrt5}{20}}}.\]
+
+\textbf{Schmidt basis for the first subsystem.} Letting $\varphi=\dfrac{1+\sqrt5}{2}$, the eigenvectors of $M$ are found by solving $(M-\mu_i I)\mathbf{x}=0$. For $\mu_1$: $y=\dfrac{\sqrt5-1}{2}x=\dfrac{1}{\varphi}x$, giving the unnormalized vector $(\varphi,1)^{\mathrm{T}}$. For $\mu_2$: $y=-\varphi x$, giving $(1,-\varphi)^{\mathrm{T}}$. Normalizing and verifying orthogonality $\langle u_1|u_2\rangle\propto\varphi\cdot1+1\cdot(-\varphi)=0$:
+\[
+\ket{u_1}=\frac{\varphi\ket0+\ket1}{\sqrt{\varphi^2+1}},
+\qquad
+\ket{u_2}=\frac{\ket0-\varphi\ket1}{\sqrt{\varphi^2+1}}.
+\]
+
+\textbf{Schmidt basis for the second subsystem.} Since $A$ is real symmetric, the left and right singular vectors coincide, so we take $\ket{v_i}=\ket{u_i}$.
+
+\textbf{Schmidt decomposition:}
+\[
+\boxed{\ket{\psi_2}=\sqrt{\frac{7+3\sqrt5}{20}}\,\ket{u_1}\ket{v_1}+\sqrt{\frac{7-3\sqrt5}{20}}\,\ket{u_2}\ket{v_2}},
+\]
+where $\ket{u_1}=\ket{v_1}=\dfrac{\varphi\ket0+\ket1}{\sqrt{\varphi^2+1}}$, $\ket{u_2}=\ket{v_2}=\dfrac{\ket0-\varphi\ket1}{\sqrt{\varphi^2+1}}$, and $\varphi=\dfrac{1+\sqrt5}{2}$.
+
+\end{solution}
+
+\section*{Problem 5 (25 points)}
+Define \(k = k_{n-1}2^{n-1} + k_{n-2}2^{n-2} + \cdots + k_0 2^0\), \(\ket{k} = \ket{k_{n-1}}\ket{k_{n-2}}\cdots\ket{k_0}\), where \(k\) is an integer ranging from 0 to \(2^n-1\) and \(k_j \in \{0,1\}\). Assume \(\theta\) is a constant parameter. Show that
+
+\[\sum_{k=0}^{2^n-1} e^{i\theta k}\ket{k} = \left(\ket{0} + e^{i\theta 2^{n-1}}\ket{1}\right) \otimes \left(\ket{0} + e^{i\theta 2^{n-2}}\ket{1}\right) \otimes \cdots \otimes \left(\ket{0} + e^{i\theta 2^0}\ket{1}\right)\]
+
+\underline{Note:} The above result shows that \textbf{LHS = sum of \(2^n\) terms \(\boldsymbol{\rightarrow}\) RHS = tensor product of \(\textit{n}\) terms}. This leads to the exponential speed up of the Quantum Fourier Transform (QFT) over the classical Fourier transform.
+
+\underline{Hint:} Note that the LHS of the integer summation is broken into the RHS of tensor products of binary summations. For the RHS below, factor it into the different \(k_j\) terms and explicitly do the sum for \(k_j = 0 \text{ and } 1\)
+
+\[\sum_{k=0}^{2^n-1} e^{i\theta k}\ket{k} = \sum_{k_{n-1},k_{n-2},\cdots,k_0=0}^1 e^{i\theta \left(k_{n-1}2^{n-1} + k_{n-2}2^{n-2} + \cdots + k_0 2^0\right)}\ket{k_{n-1}k_{n-2}\cdots k_0}\]
+
+\begin{solution}
+
+\textbf{Step 1: Express \(k\) in binary form.}
+
+By definition, $k=k_{n-1}2^{n-1}+\cdots+k_0 2^0$ with $k_j\in\{0,1\}$, and $\ket{k}=\ket{k_{n-1}}\otimes\cdots\otimes\ket{k_0}$. Since each $k_j$ independently takes values in $\{0,1\}$, summing over $k$ from $0$ to $2^n-1$ is equivalent to summing over all binary digits independently:
+\[
+\sum_{k=0}^{2^n-1} e^{i\theta k}\ket{k}
+=
+\sum_{k_{n-1},\dots,k_0=0}^1
+e^{i\theta\left(k_{n-1}2^{n-1}+\cdots+k_0 2^0\right)}
+\left(\ket{k_{n-1}}\otimes\cdots\otimes\ket{k_0}\right).
+\]
+
+\textbf{Step 2: Factor the exponential.}
+
+Using $e^{A+B}=e^Ae^B$, the exponential factors as $e^{i\theta k_{n-1}2^{n-1}}\cdots e^{i\theta k_0 2^0}$. Distributing each scalar into the corresponding tensor factor gives
+\[
+\sum_{k=0}^{2^n-1} e^{i\theta k}\ket{k}
+=
+\sum_{k_{n-1},\dots,k_0=0}^1
+\left(e^{i\theta k_{n-1}2^{n-1}}\ket{k_{n-1}}\right)
+\otimes\cdots\otimes
+\left(e^{i\theta k_0 2^0}\ket{k_0}\right).
+\]
+
+\textbf{Step 3: Separate into independent single-bit sums.}
+
+Since each term in the multiple sum is a tensor product where the $j$-th factor $e^{i\theta k_j 2^j}\ket{k_j}$ depends only on $k_j$, and the variables $k_0,\dots,k_{n-1}$ are independent, we can apply the distributivity of the tensor product over addition, i.e.\ $(A\otimes B)+(A\otimes C)=A\otimes(B+C)$, repeatedly to factor the multiple sum into a tensor product of single-variable sums:
+\[
+\sum_{k=0}^{2^n-1} e^{i\theta k}\ket{k}
+=
+\left(\sum_{k_{n-1}=0}^1 e^{i\theta k_{n-1}2^{n-1}}\ket{k_{n-1}}\right)
+\otimes\cdots\otimes
+\left(\sum_{k_0=0}^1 e^{i\theta k_0 2^0}\ket{k_0}\right).
+\]
+
+\textbf{Step 4: Evaluate each single-bit sum.}
+
+For each factor, since $k_j\in\{0,1\}$ and $e^0=1$:
+\[
+\sum_{k_j=0}^1 e^{i\theta k_j 2^j}\ket{k_j}
+= e^0\ket{0}+e^{i\theta 2^j}\ket{1}
+= \ket{0}+e^{i\theta 2^j}\ket{1}.
+\]
+
+Applying this to every factor yields the desired result:
+\[
+\boxed{
+\sum_{k=0}^{2^n-1} e^{i\theta k}\ket{k}
+=
+\left(\ket{0}+e^{i\theta 2^{n-1}}\ket{1}\right)\otimes
+\left(\ket{0}+e^{i\theta 2^{n-2}}\ket{1}\right)\otimes\cdots\otimes
+\left(\ket{0}+e^{i\theta 2^0}\ket{1}\right)
+}.
+\]
+
+This shows that a sum of $2^n$ terms on the LHS equals a tensor product of only $n$ factors on the RHS, which is the key structural identity underlying the exponential speedup of the Quantum Fourier Transform.
+
+\end{solution}
+
+\end{document}

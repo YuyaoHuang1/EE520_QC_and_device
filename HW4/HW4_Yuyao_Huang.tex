@@ -1,0 +1,292 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, physics}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  showstringspaces=false,
+}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newenvironment{solution}
+{\par\noindent\textbf{Solution:}\par}
+{\vspace{1em}}
+
+\title{Homework Assignment No.4 \\ EE520/EE459 \\ Yuyao Huang}
+\date{Due 11:59 PM, March 27, 2026}
+\begin{document}
+\maketitle
+
+\textbf{Total: 100 points} \\
+\textbf{Submit: a single PDF file of all your work}
+
+\section*{Problem 1 (30 points)}
+(\(\mathrm{CNOT}\) action on a density matrix \(\mathrm{CNOT}\,\rho\,\mathrm{CNOT}^\dagger\)). The \(\mathrm{CNOT}\) gate is a simple permutation whose action on a density matrix \(\rho\) is to rearrange the elements in the matrix. Write out this action explicitly in the computation basis. \\
+\textbf{\underline{Note}:} Unitary gate U on state \(\ket{\psi}\) transforms the state to \(\mathrm{U}\ket{\psi}\). Similarly, a unitary gate \(\mathrm{U}\) acting on a density matrix \(\rho\) transforms it to \(\mathrm{U}\rho\mathrm{U}^\dagger\). For a two-qubit density matrix (\(4 \times 4\) matrix) and \(\mathrm{U}=\mathrm{CNOT}\) (\(4 \times 4\) matrix), \(\mathrm{CNOT}\) transfroms \(\rho\) to \(\mathrm{CNOT}\rho\mathrm{CNOT}^\dagger\).\\
+\textbf{\underline{Hint}:} You may do it either by Matrix multiplication or by writing it in a dyad form. You can find the matrix representation from the Dyad representation for \(\rho\) and \(\mathrm{CNOT}\) and do the calculation, or do the dyad multiplication directly.  If using the dyad for calculation, then you can put the final result to the matrix form.   If qubit-1 is the Control and qubit-2 is the Target, then \(\mathrm{CNOT} = \ket{0}\bra{0} \otimes \mathrm{I} + \ket{1}\bra{1} \otimes \mathrm{X} = \ket{0}\bra{0} \otimes \left(\ket{0}\bra{0} + \ket{1}\bra{1}\right) + \ket{1}\bra{1} \otimes \left(\ket{0}\bra{1} + \ket{1}\bra{0}\right) = \ket{00}\bra{00} + \ket{01}\bra{01} + \ket{10}\bra{11} + \ket{11}\bra{10}\) = four terms in all; and \(\rho = \rho_{11}\ket{00}\bra{00} + \rho_{12}\ket{00}\bra{01} + \rho_{13}\ket{00}\bra{10} + \rho_{14}\ket{00}\bra{11} + \rho_{21}\ket{01}\bra{00} + \rho_{22}\ket{01}\bra{01} + \cdots + \rho_{44}\ket{11}\bra{11}\) = 16 terms in all. The two-term \(\mathrm{CNOT}\) (with \(\mathrm{I}\) and \(\mathrm{x}\) acting on Target) is easir to work with. Apply \(\mathrm{CNOT}\) from either side of \(\rho\). \\
+\textbf{\underline{Note}:} FYI,t he CNOT on the LEFT swaps the 3rd and 4th rows.  Then with the resulting matrix, the CNOT on the RIGHT swaps the 3rd and 4th columns.  With this, you can check if your result is right. 
+ 
+\begin{solution}
+\textbf{1. Write the two-qubit density matrix in the computational basis}
+
+Use the basis ordered as \[\{\ket{00}, \ket{01}, \ket{10}, \ket{11}\}\]
+A general two-qubit density matrix is \[\rho = \begin{bmatrix}\rho_{11} & \rho_{12} & \rho_{13} & \rho_{14} \\ \rho_{21} & \rho_{22} & \rho_{23} & \rho_{24} \\ \rho_{31} & \rho_{32} & \rho_{33} & \rho_{34} \\ \rho_{41} & \rho_{42} & \rho_{43} & \rho_{44}\end{bmatrix}\]
+
+\textbf{2. Write the CNOT gate in the computational basis}
+
+Here qubit 1 is the control and qubit 2 is the target. Its action on basis states is \[\mathrm{CNOT}\ket{00} = \ket{00}, \quad \mathrm{CNOT}\ket{01} = \ket{01}, \quad \mathrm{CNOT}\ket{10} = \ket{11}, \quad \mathrm{CNOT}\ket{11} = \ket{10}\]
+So in matrix form, \[\mathrm{CNOT} = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}\]
+Also, since CNOT is Hermitian and unitary, \[\mathrm{CNOT}^\dagger = \mathrm{CNOT}\]
+So we need to compute \[\rho' = \mathrm{CNOT}\rho\mathrm{CNOT}\]
+
+\textbf{3. First multiply on the left: \(\mathrm{CNOT}\rho\)}
+
+Left multiplication by CNOT swaps the 3rd and 4th rows of \(\rho\), so \[\mathrm{CNOT}\rho = \begin{bmatrix}\rho_{11} & \rho_{12} & \rho_{13} & \rho_{14} \\ \rho_{21} & \rho_{22} & \rho_{23} & \rho_{24} \\ \rho_{41} & \rho_{42} & \rho_{43} & \rho_{44} \\ \rho_{31} & \rho_{32} & \rho_{33} & \rho_{34}\end{bmatrix}\]
+
+Because the third row of CNOT is \(\left(0, 0, 0, 1\right)\), so the new 3rd row becomes the old 4th row; similarly the new 4th row becomes the old 3rd row.
+
+\textbf{4. Then multiply on the right: \(\left(\mathrm{CNOT}\rho\right)\mathrm{CNOT}\)}
+
+Right multiplication by CNOT swaps the 3rd and 4th columns of the current matrix. \[\rho' = \mathrm{CNOT}\rho\mathrm{CNOT}^\dagger = \begin{bmatrix}\rho_{11} & \rho_{12} & \rho_{14} & \rho_{13} \\ \rho_{21} & \rho_{22} & \rho_{24} & \rho_{23} \\ \rho_{41} & \rho_{42} & \rho_{44} & \rho_{43} \\ \rho_{31} & \rho_{32} & \rho_{34} & \rho_{33}\end{bmatrix}\]
+This is the explicit action in the computational basis.
+
+\textbf{5. Final result}
+\[\boxed{\mathrm{CNOT}\rho\mathrm{CNOT}^\dagger = \mathrm{CNOT}\rho\mathrm{CNOT} = \begin{bmatrix}\rho_{11} & \rho_{12} & \rho_{14} & \rho_{13} \\ \rho_{21} & \rho_{22} & \rho_{24} & \rho_{23} \\ \rho_{41} & \rho_{42} & \rho_{44} & \rho_{43} \\ \rho_{31} & \rho_{32} & \rho_{34} & \rho_{33}\end{bmatrix}}\]
+\end{solution}
+
+\section*{Problem 2 (20 points)}
+Using only Toffoli gates and a \(\mathrm{C^1(u)}\) gate, \textbf{construct a quantum circuit for \(\mathrm{C^7}\)}.
+
+\begin{solution}
+We want to construct a \(7\)-controlled-\(u\) gate, denoted by \(\mathrm{C^7}(u)\), using only Toffoli gates and one \(\mathrm{C^1}(u)\) gate.
+
+Let the seven control qubits be \[c_1,c_2,c_3,c_4,c_5,c_6,c_7,\]
+the target qubit be \(t\), and introduce six ancilla qubits \[a_1,a_2,a_3,a_4,a_5,a_6,\]
+all initialized to \(\ket{0}\).
+
+The idea is to use Toffoli gates to compute the logical AND of the seven control qubits into the ancilla register, then apply a single \(\mathrm{C^1}(u)\) gate controlled by the final ancilla, and finally uncompute the ancillas.
+
+\textbf{1. Compute the AND of the control qubits.}
+
+Apply the following Toffoli gates:
+\[\mathrm{TOF}(c_1,c_2; a_1),\]
+\[\mathrm{TOF}(a_1,c_3; a_2),\]
+\[\mathrm{TOF}(a_2,c_4; a_3),\]
+\[\mathrm{TOF}(a_3,c_5; a_4),\]
+\[\mathrm{TOF}(a_4,c_6; a_5),\]
+\[\mathrm{TOF}(a_5,c_7; a_6).\]
+Since each ancilla starts in \(\ket{0}\), after these gates we have
+\[a_1 = c_1c_2, \quad a_2 = c_1c_2c_3, \quad a_3 = c_1c_2c_3c_4,\]
+\[a_4 = c_1c_2c_3c_4c_5, \quad a_5 = c_1c_2c_3c_4c_5c_6,\quad a_6 = c_1c_2c_3c_4c_5c_6c_7.\]
+Thus, \(a_6=1\) if and only if all seven control qubits are \(1\).
+
+\textbf{2. Apply the controlled-\(u\) gate.}
+
+Now apply a single controlled-\(u\) gate with control \(a_6\) and target \(t\):
+\[\mathrm{C^1}(u)(a_6;t).\]
+
+This applies \(u\) to the target qubit \(t\) exactly when
+\[a_6 = c_1c_2c_3c_4c_5c_6c_7 = 1,\]
+that is, exactly when all seven control qubits are \(1\). Therefore, this reproduces the action of \(\mathrm{C^7}(u)\).
+
+\textbf{3. Uncompute the ancillas.}
+
+To restore all ancilla qubits to \(\ket{0}\), apply the same Toffoli gates in reverse order:
+\[\mathrm{TOF}(a_5,c_7; a_6),\]
+\[\mathrm{TOF}(a_4,c_6; a_5),\]
+\[\mathrm{TOF}(a_3,c_5; a_4),\]
+\[\mathrm{TOF}(a_2,c_4; a_3),\]
+\[\mathrm{TOF}(a_1,c_3; a_2),\]
+\[\mathrm{TOF}(c_1,c_2; a_1).\]
+This removes the garbage information and returns all ancillas to their initial state.
+
+Hence, the circuit for \(\mathrm{C^7}(u)\) is
+\[\begin{aligned} \mathrm{TOF}(c_1,c_2; a_1) &\rightarrow \mathrm{TOF}(a_1,c_3; a_2) \rightarrow \mathrm{TOF}(a_2,c_4; a_3) &\rightarrow \mathrm{TOF}(a_3,c_5; a_4) \rightarrow \mathrm{TOF}(a_4,c_6; a_5) \\
+&\rightarrow \mathrm{TOF}(a_5,c_7; a_6) \rightarrow \mathrm{C^1}(u)(a_6;t) \end{aligned}\]
+
+followed by the reverse sequence of Toffoli gates.
+
+Therefore, \(\mathrm{C^7}(u)\) can be implemented using
+\[12 \text{ Toffoli gates } + 1 \text{ controlled-}u \text{ gate},\]
+with \(6\) ancilla qubits.
+
+\[\boxed{\mathrm{C^7}(u) = \text{compute }(c_1c_2c_3c_4c_5c_6c_7)\text{ into }a_6 \rightarrow \mathrm{C^1}(u)(a_6;t) \rightarrow \text{uncompute}}\]
+\end{solution}
+
+\begin{solution}
+
+\end{solution}
+
+
+\section*{Problem 3 (25 points)}
+\textbf{Show the equality LHS=RHS.}
+
+(A) Fredkin gate. \\
+\underline{Hint}: Consider the cases of 0 or 1 for the top control bit.  You may directly use the equivalence of a SWAP gate with the three CNOT's. \\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{problem3_1.png}
+\caption{Fredkin gate circuit equivalence (LHS = RHS).}
+\label{fig:problem3_1}
+\end{figure}
+
+(B) Implementing CNOT using CZ, show: \\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{problem3_2.png}
+\caption{Circuit equivalence using $R_y$ and $Z$ gates.}
+\label{fig:problem3_2}
+\end{figure}
+\underline{Hint}: Write the LHS as a product of three tensor-product operators (CZ as tensor products with dyads), work on this expression of sum of only two terms until it reduces to the dyad form of CNOT of the RHS. Be careful not to express it all in computational basis as it will yield too many terms.
+
+\begin{solution}
+\textbf{(A) Fredkin gate: show LHS = RHS}
+
+\textbf{1. Identify the RHS gate.}
+
+The RHS circuit is the Fredkin gate, i.e. the controlled-SWAP gate. The top qubit is the control qubit, and the lower two qubits are swapped if and only if the control qubit is \(1\).
+
+\textbf{2. Consider the case where the top control qubit is \(0\).}
+
+If the top qubit is \(\ket{0}\), then none of the controlled operations on the LHS is activated. Therefore, the LHS does nothing to the lower two qubits, so it acts as the identity.
+
+On the RHS, the Fredkin gate also does nothing when the control qubit is \(0\). Hence, in this case, the LHS and RHS are the same.
+
+\textbf{3. Consider the case where the top control qubit is \(1\).}
+
+If the top qubit is \(\ket{1}\), then all controlled operations on the LHS are activated. Therefore, the LHS reduces to the three-gate sequence acting on the lower two qubits: \[\mathrm{CNOT}_{2\to 3}\,\mathrm{CNOT}_{3\to 2}\,\mathrm{CNOT}_{2\to 3}.\]
+
+\textbf{4. Use the standard decomposition of the SWAP gate.}
+
+Recall that the SWAP gate can be decomposed as\[\mathrm{SWAP} = \mathrm{CNOT}_{2\to 3}\,\mathrm{CNOT}_{3\to 2}\,\mathrm{CNOT}_{2\to 3}.\]
+
+Thus, when the top control qubit is \(1\), the LHS swaps the lower two qubits. This is exactly the action of the Fredkin gate on the RHS.
+
+\textbf{5. Final conclusion for part (A).}
+
+Since the LHS and RHS act identically in both possible cases for the control qubit (\(0\) and \(1\)), the two circuits are equivalent. Therefore,
+\[\boxed{\text{LHS}=\text{RHS}=\text{Fredkin gate (controlled-SWAP).}}\]
+
+\textbf{(B) Implementing CNOT using CZ}
+
+We want to show that \[(I\otimes R_y(\pi/2))\,\mathrm{CZ}\,(I\otimes R_y(-\pi/2))=\mathrm{CNOT}.\]
+
+\textbf{1. Write \(\mathrm{CZ}\) in dyad form.}
+
+The controlled-\(Z\) gate can be written as
+\[\mathrm{CZ} = \ket{0}\bra{0}\otimes I + \ket{1}\bra{1}\otimes Z.\]
+
+\textbf{2. Substitute this expression into the LHS.}
+Then \[(I\otimes R_y(\pi/2))\,\mathrm{CZ}\,(I\otimes R_y(-\pi/2))\]
+\[=(I\otimes R_y(\pi/2)) \left(\ket{0}\bra{0}\otimes I + \ket{1}\bra{1}\otimes Z\right)(I\otimes R_y(-\pi/2)).\]
+
+\textbf{3. Distribute the tensor-product operators.}
+
+Using linearity, this becomes
+\[= \ket{0}\bra{0}\otimes \bigl(R_y(\pi/2)\,I\,R_y(-\pi/2)\bigr) + \ket{1}\bra{1}\otimes \bigl(R_y(\pi/2)\,Z\,R_y(-\pi/2)\bigr).\]
+
+\textbf{4. Simplify each term.}
+For the first term, \[R_y(\pi/2)\,I\,R_y(-\pi/2)=I.\]
+
+For the second term, use the standard identity
+\[R_y(\pi/2)\,Z\,R_y(-\pi/2)=X.\]
+
+Therefore,
+\[(I\otimes R_y(\pi/2))\,\mathrm{CZ}\,(I\otimes R_y(-\pi/2)) = \ket{0}\bra{0}\otimes I+\ket{1}\bra{1}\otimes X.\]
+
+\textbf{5. Recognize the dyad form of CNOT.}
+
+Recall that
+\[\mathrm{CNOT} = \ket{0}\bra{0}\otimes I+\ket{1}\bra{1}\otimes X.\]
+Hence,
+\[\boxed{(I\otimes R_y(\pi/2))\,\mathrm{CZ}\,(I\otimes R_y(-\pi/2)) = \mathrm{CNOT}}.\]
+\end{solution}
+
+\section*{Problem 4 (20 points)}
+Apply Theorem A4.15 and CFA(Continued Fraction Algorithm)  to find integers for 
+the rational approximation of 2.94857295039273 that is correct down to the 5 
+decimal points below Zero.
+
+\begin{solution}
+Let \(\varphi = 2.94857295039273\). We apply the Continued Fraction Algorithm (CFA) iteratively: at each step, compute \(a_n = \lfloor \varphi_n \rfloor\) and set \(\varphi_{n+1} = 1/(\varphi_n - a_n)\).
+
+\textbf{1. CFA iterations}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Step $n$ & $\varphi_n$ & $a_n$ & Remainder $\varphi_n - a_n$ \\
+\midrule
+0 & 2.94857295039273 & 2 & 0.94857295039273 \\
+1 & 1.05421517616118 & 1 & 0.05421517616118 \\
+2 & 18.44501984143829 & 18 & 0.44501984143829 \\
+3 & 2.24709081907010 & 2 & 0.24709081907010 \\
+4 & 4.04709492551526 & 4 & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+So the continued fraction expansion is\[\varphi = [2;\,1,\,18,\,2,\,4,\,\ldots].\]
+
+\textbf{2. Convergents via the recurrence}
+
+The convergents \(p_n/q_n\) are built by
+\[p_n = a_n\,p_{n-1} + p_{n-2}, \qquad q_n = a_n\,q_{n-1} + q_{n-2},\]
+with \(p_{-1}=1,\,p_0=a_0,\,q_{-1}=0,\,q_0=1\).
+
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+$n$ & $a_n$ & $p_n$ & $q_n$ & $p_n/q_n$ (approx.) \\
+\midrule
+0 & 2  & 2   & 1   & 2.000000000 \\
+1 & 1  & 3   & 1   & 3.000000000 \\
+2 & 18 & 56  & 19  & 2.947368421 \\
+3 & 2  & 115 & 39  & 2.948717949 \\
+4 & 4  & 516 & 175 & 2.948571429 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Sample recurrence} at $n=4$:
+\[p_4 = 4 \times 115 + 56 = 516, \qquad q_4 = 4 \times 39 + 19 = 175.\]
+
+\textbf{3. Verification: accuracy and Theorem A4.15}
+
+The approximation error at $n=4$ is
+\[\left|\frac{516}{175} - \varphi\right| = |2.94857142857\ldots - 2.94857295039\ldots| \approx 1.52\times10^{-6} < 10^{-5},\]
+so $516/175$ is correct to \textbf{5 decimal places}.
+
+By Theorem A4.15, since $p$ and $q$ are positive integers and
+\[\left|\frac{p}{q} - \varphi\right| = 1.52\times10^{-6} \;<\; \frac{1}{2q^2} = \frac{1}{2\times175^2} = \frac{1}{61250} \approx 1.63\times10^{-5},\]
+the condition of Theorem A4.15 is satisfied, confirming that $516/175$ is a convergent of the continued fraction of $\varphi$.
+
+\textbf{4. Result}
+
+\[\boxed{\frac{p}{q} = \frac{516}{175} \approx 2.94857142857\ldots,\quad \left|\frac{516}{175} - 2.94857295039273\right| \approx 1.52\times10^{-6} < 10^{-5}.}\]
+
+\textbf{5. Verification code}
+
+The following Python script (no external packages required) reproduces all steps above:
+
+\lstinputlisting{problem4_CFA.py}
+\end{solution}
+\end{document}
