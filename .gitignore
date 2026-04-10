@@ -1,8 +1,11 @@
 *.pdf
+*.DS_Store
+*.png
 
 *.aux
 *.fls
 *.log
 *.fdb_latexmk
 *.synctex.gz
-*.png
+
+*.json
